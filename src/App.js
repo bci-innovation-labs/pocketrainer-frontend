@@ -6,6 +6,7 @@ import {
     Route
 } from "react-router-dom";
 
+import TopNavigation from "./Components/Misc/TopNavigation";
 import Index from "./Components/Gateway/Index";
 import NotFoundError from "./Components/Misc/NotFoundError";
 
@@ -14,7 +15,7 @@ function App() {
         <>
             <Router>
                 <div>
-                    {/* <TopNavigation /> */}
+                    <TopNavigation />
                 </div>
                 <Routes>
                     <Route exact path="/" element={<Index/>}/>
