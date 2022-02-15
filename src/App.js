@@ -9,6 +9,8 @@ import {
 import TopNavigation from "./Components/Misc/TopNavigation";
 import Index from "./Components/Gateway/Index";
 import NotFoundError from "./Components/Misc/NotFoundError";
+import TrainerDashboard from "./Components/Dashboard/TrainerDashboard";
+
 
 function App() {
     return (
@@ -18,6 +20,7 @@ function App() {
                     <TopNavigation />
                 </div>
                 <Routes>
+                    <Route path="/dashboard-trainer" element={<TrainerDashboard/>}/>
                     <Route exact path="/" element={<Index/>}/>
                     <Route path="*" element={<NotFoundError/>}/>
                 </Routes>
