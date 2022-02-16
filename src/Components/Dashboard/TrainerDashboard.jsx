@@ -3,7 +3,6 @@ export default function TrainerDashboard (props){
     <>
       <h1>Trainer Dashboard</h1>
       <p>im just a random comment</p>
-          <p>im just a random comment</p>
     </>
   )
 }
