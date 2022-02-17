@@ -8,6 +8,7 @@ import {
 
 import TopNavigation from "./Components/Misc/TopNavigation";
 import Index from "./Components/Gateway/Index";
+import Register from "./Components/Gateway/Register";
 import NotFoundError from "./Components/Misc/NotFoundError";
 import TrainerDashboard from "./Components/Dashboard/TrainerDashboard";
 
@@ -20,6 +21,7 @@ function App() {
                     <TopNavigation />
                 </div>
                 <Routes>
+                    <Route path="/register" element={<Register/>}/>
                     <Route path="/dashboard-trainer" element={<TrainerDashboard/>}/>
                     <Route exact path="/" element={<Index/>}/>
                     <Route path="*" element={<NotFoundError/>}/>
