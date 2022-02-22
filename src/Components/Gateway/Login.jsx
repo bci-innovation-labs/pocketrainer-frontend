@@ -6,8 +6,10 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 export default function Login(props) {
     return (
         <>
+        <img src="LoginBg.jpg" className="bg" style={{  zIndex: -1, }}/>
+
         <div className="b" style={{    }}>
-           <br /> <br /> <br />
+           <br />
            <div className="w3-row">
               <div className="w3-third w3-container">
                  <div className="w3-light-grey w3-container w3-round-xlarge">
@@ -51,6 +53,7 @@ export default function Login(props) {
                  <button className="w3-btn w3-green w3-right w3-margin-bottom w3-round-large">SIGN UP</button>
               </div>
            </div>
+           <br />
         </div>
         </>
     );
