@@ -14,9 +14,6 @@ function TopNavigation() {
 
     return (
         <>
-<<<<<<< HEAD
-
-=======
             <div className={`w3-deep-purple w3-top`} style={{height:"70px",}}>
                 {showMenu && <div className="w3-sidebar w3-bar-block  w3-card w3-animate-right" style={{width:"200px",right:"0"}}>
                     <button onClick={onHamburgerClick}
@@ -71,7 +68,6 @@ function TopNavigation() {
                           >&#9776;</button>
                 </div>
             </div>
->>>>>>> 82d71805ef288e63546ef36a15bad4c5bc9dc6a8
         </>
     );
 }

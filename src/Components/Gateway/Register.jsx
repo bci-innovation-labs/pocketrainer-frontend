@@ -49,8 +49,8 @@ export default function Register(props) {
                         <input className="w3-input w3-round-xlarge" type="password" name="password"/>
                      </p>
                      <p>
-                        <button className="w3-btn w3-green w3-block w3-margin-bottom w3-round-large">Register</button>
-                        <button className="w3-btn w3-red w3-block w3-margin-bottom w3-round-large">Cancel</button>
+                        <button className="w3-btn w3-green w3-block w3-margin-bottom w3-round-large">REGISTER</button>
+                        <button className="w3-btn w3-red w3-block w3-margin-bottom w3-round-large">CANCEL</button>
                      </p>
                   </div>
                </div>

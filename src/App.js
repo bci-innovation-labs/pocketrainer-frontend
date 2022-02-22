@@ -8,6 +8,9 @@ import {
 
 import TopNavigation from "./Components/Misc/TopNavigation";
 import Index from "./Components/Gateway/Index";
+import Login from "./Components/Gateway/Login";
+import ClientList from "./Components/Clients/ClientList";
+import ClientDetails from "./Components/Clients/ClientDetails";
 import Register from "./Components/Gateway/Register";
 import NotFoundError from "./Components/Misc/NotFoundError";
 import TrainerDashboard from "./Components/Dashboard/TrainerDashboard";
@@ -21,6 +24,9 @@ function App() {
                     <TopNavigation />
                 </div>
                 <Routes>
+                    <Route path="/client-details" element={<ClientDetails/>}/>
+                    <Route path="/clients" element={<ClientList/>}/>
+                    <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/dashboard-trainer" element={<TrainerDashboard/>}/>
                     <Route exact path="/" element={<Index/>}/>
