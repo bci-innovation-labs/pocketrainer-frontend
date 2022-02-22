@@ -14,6 +14,8 @@ import ClientDetails from "./Components/Clients/ClientDetails";
 import Register from "./Components/Gateway/Register";
 import NotFoundError from "./Components/Misc/NotFoundError";
 import TrainerDashboard from "./Components/Dashboard/TrainerDashboard";
+import AppointmentDetails from "./Components/Appointments/Details";
+
 
 
 function App() {
