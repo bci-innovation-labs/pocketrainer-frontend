@@ -14,7 +14,8 @@ class AppointmentDetails extends Component{
   constructor(props){
     super(props)
     this.state = {
-      date:new Date(localStorage.getItem("USER_PICKED_DATE")),
+      //date:new Date(localStorage.getItem("USER_PICKED_DATE")),
+      date:new Date(),
     };
     this.onDateChange = this.onDateChange.bind(this)
   }
@@ -28,61 +29,51 @@ class AppointmentDetails extends Component{
   }
 
   render(){
-     const { onDateChange } = this.state
+    const { onDateChange } = this.state
     const { date } = this.state
     //*new Date().setDate(new Date().getDate() - 1* === Yesterday Day
-    const modifiers = {
-      disabled: date => (date <  new Date().setDate(new Date().getDate() - 1)) || (getDay(date) === 0),
-    }
+
     return(
       <>
-        <h1 className="w3-center">Appointments Details</h1>
+        <h1 className="w3-center"><b>Appointments Details</b></h1>
         <br /><br /><br />
-        <div class="w3-row">
-          <div class="w3-container w3-threequarter">
-            <div class="w3-container w3-center">
-              <img className="w3-center w3-circle" src="https://www.w3schools.com/w3css/img_car.jpg" style={{width:"200px"}}></img>
-              <h2 class="">Chris James</h2>
-              <h5 class="">23 Years Old</h5>
+        <div className="w3-row">
+          <div className="w3-container w3-col l8">
+            <div className="w3-container w3-center">
+              <img className="w3-center w3-circle" src="https://www.w3schools.com/w3css/img_car.jpg" style={{width:"150px", height:"150px"}}></img>
+              <h2 className=""><b>Chris James</b></h2>
+              <h5 className="">23 Years Old</h5>
             </div>
-            <div class="w3-row w3-padding">
-              <div class="w3-half w3-container">
-              <form class="w3-container">
-                <div class="w3-col" style={{width:"50px"}}><i class="w3-xxlarge fa fa-pencil"></i></div>
-                  <div class="w3-rest">
-                    <input class="w3-input w3-border" name="message" type="text" placeholder="Message" />
-                    <label class="w3-text-blue"><b>Date</b></label>
-                  </div>
-              </form>
-              </div>
-              <div class="w3-half w3-container">
-                <form class="w3-container">
-                  <div class="w3-col" style={{width:"50px"}}><i class="w3-xxlarge fa fa-pencil"></i></div>
-                    <div class="w3-rest">
-                      <input class="w3-input w3-border" name="message" type="text" placeholder="Message" />
-                      <label class="w3-text-blue"><b>Time</b></label>
-                    </div>
-                </form>
+            <div className="w3-hide-small">
+              <div>
+                <br /><br /><br />
               </div>
             </div>
-            <div class="w3-row w3-padding">
-              <div class="w3-container w3-quarter">
+            <div className="w3-row w3-padding">
+              <div className="w3-row">
+                <div className="w3-container w3-col l6">
+                  <p><label className="w3-xlarge"><b>Date</b></label>
+                  <input className="w3-input w3-border w3-border-purple w3-text-white w3-black" name="last" type="text" value="26/02/2022"/></p>
+                </div>
+                <div className="w3-container w3-col l6">
+                  <p><label className="w3-xlarge"><b>Time</b></label>
+                  <input className="w3-input w3-border w3-border-purple w3-text-white w3-black" name="last" type="text" value="9:00am"/></p>
+                </div>
               </div>
-              <div class="w3-container w3-half w3-center">
-                <form class="w3-container">
-                  <div class="w3-col" style={{width:"50px"}}><i class="w3-xxlarge fa fa-pencil"></i></div>
-                    <div class="w3-rest">
-                      <input class="w3-input w3-border" name="message" type="text" placeholder="Message" />
-                      <label class="w3-text-blue"><b>Exersice Plan</b></label>
-                    </div>
-                </form>
-              </div>
-              <div class="w3-container w3-quarter">
+              <div className="w3-row">
+                <div className="w3-container w3-col l3">
+                </div>
+                <div className="w3-container w3-col l6">
+                  <p><label className="w3-xlarge"><b>Exercise Plan</b></label>
+                  <input className="w3-input w3-border w3-border-purple w3-text-white w3-black" name="last" type="text" value="Arm Muscle"/></p>
+                </div>
+                <div className="w3-container w3-col l3">
+                </div>
               </div>
             </div>
           </div>
-          <div class="w3-container w3-quarter">
-            <DatePickerCalendar date={date} onDateChange={this.onDateChange} locale={enGB} modifiers={modifiers} />
+          <div className="w3-container w3-col l4">
+            <DatePickerCalendar date={date} onDateChange={this.onDateChange} locale={enGB} />
           </div>
         </div>
       </>
