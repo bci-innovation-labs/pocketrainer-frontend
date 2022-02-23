@@ -6,6 +6,7 @@ import { format } from 'date-fns'
 import { enGB } from 'date-fns/locale'
 import { DatePickerCalendar } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
+import "./react-nice-dates-override.css";
 import { getDay } from 'date-fns'
 
 
