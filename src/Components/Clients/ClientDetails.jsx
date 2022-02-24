@@ -1,54 +1,19 @@
 import { React } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart} from 'recharts';
-
-
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid} from 'recharts';
 
 
 export default function ClientDetails(props) {
+
+    const data = [
+      { name: '6', protein: 4000, fat: 2400, BurnCal: 2400 },
+      { name: '7', protein: 3000, fat: 1398, BurnCal: 2210 },
+      { name: '8', protein: 2000, fat: 9800, BurnCal: 2290 },
+      { name: '10', protein: 2780, fat: 3908, BurnCal: 2000 },
+      { name: '11', protein: 1890, fat: 4800, BurnCal: 2181 },
+      { name: '12', protein: 2390, fat: 3800, BurnCal: 2500 }
+    ];
+    // const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}, ...];
+
     return (
         <>
         <div className="w3-row w3-padding-top-64">
@@ -83,9 +48,9 @@ export default function ClientDetails(props) {
            </div>
         </div>
         <div className="w3-row">
-           <div className="w3-col m1 w3-padding">
+           <div className="w3-col m1 w3-container">
            </div>
-           <div className="w3-col m6 w3-padding">
+           <div className="w3-col m6 w3-container">
               <h3>Goals</h3>
               <ul>
                  <li>Get clear overview of nutritional information information for his meals.</li>
@@ -98,14 +63,102 @@ export default function ClientDetails(props) {
               </ul>
            </div>
            <div className="w3-col m5">
-           <h1>Graph</h1>
-            <AreaChart data={data}>
-             <LineChart width={300} height={100} data={data}>
-               <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeWidth={2} />
-             </LineChart>
-             </AreaChart>
-
+              <div className="w3-row w3-margin-top">
+                 <div className="w3-col s1 w3-container">
+                 </div>
+                 <div className="w3-col s10 w3-container">
+                    {/* https://recharts.org/en-US/guide/getting-started */}
+                    <LineChart width={350} height={295} data={data} className="" style={{width:"100%"}}>
+                       <Line type="monotone" dataKey="protein" stroke="#e60b0b" />
+                       <Line type="monotone" dataKey="fat" stroke="#84d88e" />
+                       <Line type="monotone" dataKey="BurnCal" stroke="#e00991" />
+                       <XAxis dataKey="name" />
+                       <CartesianGrid stroke="#fff" />
+                       <Tooltip />
+                    </LineChart>
+                 </div>
+                 <div className="w3-col s1 w3-container">
+                 </div>
+              </div>
            </div>
+        </div>
+        <div className="w3-row">
+        <div className="w3-col m3">
+           <div className="w3-container w3-margin w3-padding w3-round-xxlarge" style={{width:"175px", background: "linear-gradient(45deg, rgba(2,0,36,1) 7%, rgba(72,64,136,0.9419117988992471) 95%)"}}>
+           <div className="w3-center">
+              <div className="w3-container w3-padding">
+                 <div className="w3-row">
+                    <div className="w3-col m6 w3-center">
+                       <h1><strong>18</strong></h1>
+                    </div>
+                    <div className="w3-col m6 w3-center">
+                       <h5>May</h5>
+                    </div>
+                 </div>
+                 <div className="w3-row">
+                    <p>11:00AM-12:00PM</p>
+                 </div>
+              </div>
+           </div>
+        </div>
+        </div>
+          <div className="w3-col m3">
+              <div className="w3-container w3-margin w3-padding w3-round-xxlarge" style={{width:"175px", background: "linear-gradient(45deg, rgba(2,0,36,1) 7%, rgba(72,64,136,0.9419117988992471) 95%)"}}>
+              <div className="w3-center">
+                 <div className="w3-container w3-padding">
+                    <div className="w3-row">
+                       <div className="w3-col m6 w3-center">
+                          <h1><strong>18</strong></h1>
+                       </div>
+                       <div className="w3-col m6 w3-center">
+                          <h5>May</h5>
+                       </div>
+                    </div>
+                    <div className="w3-row">
+                       <p>11:00AM-12:00PM</p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+          </div>
+          <div className="w3-col m3">
+              <div className="w3-container w3-margin w3-padding w3-round-xxlarge" style={{width:"175px", background: "linear-gradient(45deg, rgba(2,0,36,1) 7%, rgba(72,64,136,0.9419117988992471) 95%)"}}>
+              <div className="w3-center">
+                 <div className="w3-container w3-padding">
+                    <div className="w3-row">
+                       <div className="w3-col m6 w3-center">
+                          <h1><strong>18</strong></h1>
+                       </div>
+                       <div className="w3-col m6 w3-center">
+                          <h5>May</h5>
+                       </div>
+                    </div>
+                    <div className="w3-row">
+                       <p>11:00AM-12:00PM</p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+          </div>
+          <div className="w3-col m3">
+              <div className="w3-container w3-margin w3-padding w3-round-xxlarge" style={{width:"175px", background: "linear-gradient(45deg, rgba(2,0,36,1) 7%, rgba(72,64,136,0.9419117988992471) 95%)"}}>
+              <div className="w3-center">
+                 <div className="w3-container w3-padding">
+                    <div className="w3-row">
+                       <div className="w3-col m6 w3-center">
+                          <h1><strong>18</strong></h1>
+                       </div>
+                       <div className="w3-col m6 w3-center">
+                          <h5>May</h5>
+                       </div>
+                    </div>
+                    <div className="w3-row">
+                       <p>11:00AM-12:00PM</p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+          </div>
         </div>
         </>
     );

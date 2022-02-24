@@ -14,6 +14,7 @@ import ClientDetails from "./Components/Clients/ClientDetails";
 import Register from "./Components/Gateway/Register";
 import NotFoundError from "./Components/Misc/NotFoundError";
 import TrainerDashboard from "./Components/Dashboard/TrainerDashboard";
+import ClientDashboard from "./Components/Dashboard/ClientDashboard";
 import AppointmentDetails from "./Components/Appointments/Details";
 import AddAppointment from "./Components/Appointments/Add";
 
@@ -34,6 +35,7 @@ function App() {
                     <Route path="/clients" element={<ClientList/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>
+                    <Route path="/dashboard-client" element={<ClientDashboard/>}/>
                     <Route path="/dashboard-trainer" element={<TrainerDashboard/>}/>
                     <Route exact path="/" element={<Index/>}/>
                     <Route path="*" element={<NotFoundError/>}/>
