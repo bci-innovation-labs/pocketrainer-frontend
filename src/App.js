@@ -14,6 +14,10 @@ import ClientDetails from "./Components/Clients/ClientDetails";
 import Register from "./Components/Gateway/Register";
 import NotFoundError from "./Components/Misc/NotFoundError";
 import TrainerDashboard from "./Components/Dashboard/TrainerDashboard";
+import AppointmentDetails from "./Components/Appointments/Details";
+import AddAppointment from "./Components/Appointments/Add";
+
+
 
 
 function App() {
@@ -24,6 +28,8 @@ function App() {
                     <TopNavigation />
                 </div>
                 <Routes>
+                    <Route path="/add-appointment" element={<AddAppointment/>}/>
+                    <Route path="/appointment-details" element={<AppointmentDetails/>}/>
                     <Route path="/client-details" element={<ClientDetails/>}/>
                     <Route path="/clients" element={<ClientList/>}/>
                     <Route path="/login" element={<Login/>}/>
