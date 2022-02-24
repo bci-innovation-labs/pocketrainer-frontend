@@ -1,5 +1,5 @@
 import { React } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart} from 'recharts';
 
 
 const data = [
@@ -99,11 +99,12 @@ export default function ClientDetails(props) {
            </div>
            <div className="w3-col m5">
            <h1>Graph</h1>
-           <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={data}>
              <LineChart width={300} height={100} data={data}>
                <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeWidth={2} />
              </LineChart>
-           </ResponsiveContainer>
+             </AreaChart>
+
            </div>
         </div>
         </>
