@@ -1,11 +1,16 @@
-import { React } from "react";
+import { React , useState } from "react";
 import { CircularProgressbar, CircularProgressbarWithChildren} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { format } from 'date-fns'
+import { enGB } from 'date-fns/locale'
+import { DatePickerCalendar } from 'react-nice-dates'
+import 'react-nice-dates/build/style.css'
 
 const percentage = 66;
 
 
 export default function ClientDashboard(props){
+    const [date, setDate] = useState()
     return (
         <>
         <div className="w3-row">
@@ -46,6 +51,7 @@ export default function ClientDashboard(props){
                        <p>Total Score</p>
                  </div>
                  </CircularProgressbarWithChildren>
+                 <br /> <br />
               </div>
            </div>
         </div>
@@ -141,11 +147,42 @@ export default function ClientDashboard(props){
                </div>
             </div>
             {/* end ROW3 */}
+            {/* ROW 4 */}
+            <div className="w3-row w3-margin-top" style={{marginTop:"64px"}}>
+               <div className="w3-col l4 w3-center">
+                 <div className="w3-hide-large">
+                    <p>08:00 14/02/22</p>
+                 </div>
+                 <div className="w3-hide-small w3-hide-medium">
+                    <p>08:00</p>
+                    <p>14/02/22</p>
+                 </div>
+               </div>
+               <div className="w3-col l6">
+                  <div className="w3-container w3-round-xxlarge" style={{backgroundColor:"#E9EAF4"}}>
+                     <div className="w3-col s4 w3-margin-top">
+                        <img src="IconExample.png" className="w3-image w3-circle" style={{width:"50%"}}/>
+                     </div>
+                     <div className="w3-col s6 w3-text-indigo w3-margin-top w3-margin-top">
+                        <span className="w3-large w3-text-indigo w3-margin-left"><strong>Arm Muscle</strong></span>
+                        <p>Trainer : Anthony</p>
+                     </div>
+                     <div className="w3-col s2 w3-text-indigo w3-margin-top ">
+                        <p>GoodLife</p>
+                     </div>
+                  </div>
+               </div>
+               <div className="w3-col l2 w3-margin-top">
+               </div>
+            </div>
+            {/* end ROW4 */}
           <br />
            </div>
-           <div className="w3-col l5 w3-red">
-              <h1>Calendar TODO</h1>
+           <div className="w3-col l5 w3-padding">
+              <DatePickerCalendar date={date} onDateChange={setDate} locale={enGB} />
            </div>
+        </div>
+        <div className="w3-margin-bottom">
         </div>
         </>
     );
