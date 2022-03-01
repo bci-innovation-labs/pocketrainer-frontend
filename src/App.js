@@ -10,6 +10,7 @@ import TopNavigation from "./Components/Misc/TopNavigation";
 import Index from "./Components/Gateway/Index";
 import Login from "./Components/Gateway/Login";
 import ClientList from "./Components/Clients/ClientList";
+import ClientProfile from "./Components/Clients/ClientProfile";
 import ClientDetails from "./Components/Clients/ClientDetails";
 import Register from "./Components/Gateway/Register";
 import NotFoundError from "./Components/Misc/NotFoundError";
@@ -31,6 +32,7 @@ function App() {
                 <Routes>
                     <Route path="/add-appointment" element={<AddAppointment/>}/>
                     <Route path="/appointment-details" element={<AppointmentDetails/>}/>
+                    <Route path="/client-profile" element={<ClientProfile/>}/>
                     <Route path="/client-details" element={<ClientDetails/>}/>
                     <Route path="/clients" element={<ClientList/>}/>
                     <Route path="/login" element={<Login/>}/>
