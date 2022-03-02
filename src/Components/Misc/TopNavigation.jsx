@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useHistory ,useLocation } from 'react-router-dom';
 import useLocalStorage from "../../Utility/useLocalStorage";
 import { isEmpty } from 'lodash';
 import { TRAINER_ROLE_ID } from "../../Constants/App";
@@ -7,6 +8,10 @@ import { TRAINER_ROLE_ID } from "../../Constants/App";
 function TopNavigation() {
     const [showMenu, setShowMenu] = useState(false);
     const [profile] = useLocalStorage("POCKETTRAINER_PROFILE");
+    const location = useLocation()
+    if (location.pathname === "/login" || location.pathname === "/register") {
+        return <div style={{paddingTop: "-70px"}}></div>;
+    }
 
     function onHamburgerClick() {
         setShowMenu(!showMenu);
