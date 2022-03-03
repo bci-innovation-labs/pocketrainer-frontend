@@ -8,9 +8,11 @@ import { DatePickerCalendar } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
 import { getDay } from 'date-fns'
 import Select from 'react-select'
-import { groupExerciseOptions, chestMuscleExerciseOptions, armMuscleExerciseOptions, legMuscleExerciseOptions, abdominalMuscleExerciseOptions } from '../../Constants/Fields'
+import { groupExerciseOptions, chestMuscleExerciseOptions, armMuscleExerciseOptions, legMuscleExerciseOptions, abdominalMuscleExerciseOptions, timeOptions } from '../../Constants/Fields'
 
-
+  function addMinutes(dt, minutes) {
+      return new Date(dt.getTime() + minutes*60000);
+  }
 
 class AddAppointment extends Component{
   constructor(props){
@@ -19,6 +21,7 @@ class AddAppointment extends Component{
       specific_exercise_is_disabled: true,
       //date:new Date(localStorage.getItem("USER_PICKED_DATE")),
       date:new Date(),
+      time: null,
       client_options : [
       { value: '1', label: 'Adam' },
       { value: '2', label: 'Jacob' },
@@ -37,6 +40,8 @@ class AddAppointment extends Component{
     this.onSeriesChange = this.onSeriesChange.bind(this)
     this.onAddClick = this.onAddClick.bind(this)
     this.onSpecificExerciseChange = this.onSpecificExerciseChange.bind(this)
+    this.onTimeChange = this.onTimeChange.bind(this)
+    this.onSubmitClick = this.onSubmitClick.bind(this)
   }
 
   onDateChange(pickedDate){
@@ -46,6 +51,13 @@ class AddAppointment extends Component{
     })
     localStorage.setItem("USER_PICKED_DATE", pickedDate);
   }
+
+  onTimeChange(e){
+  console.log(e)
+  this.setState({
+    time: e,
+  })
+}
 
   onGroupExerciseChange(e){
     console.log(e)
@@ -106,12 +118,26 @@ class AddAppointment extends Component{
      })
   }
 
+  onSubmitClick(e){
+    const { date, time } = this.state
+
+    const dt = new Date(date.toDateString());
+
+    const timeValue = time["value"]
+
+    const minutes = 60 * timeValue;
+
+    const newDate = addMinutes(dt, minutes);
+
+       console.log("your date is:", newDate);
+
+    }
 
   render(){
     const { client_options, specificExerciseOptions, reps, series, routines, specificExercise, groupExercise } = this.state
     console.log(routines)
     const { onDateChange } = this.state
-    const { date, specific_exercise_is_disabled } = this.state
+    const { date, time, specific_exercise_is_disabled } = this.state
     //*new Date().setDate(new Date().getDate() - 1* === Yesterday Day
 
     //https://stackoverflow.com/a/51844542
@@ -160,7 +186,13 @@ class AddAppointment extends Component{
               <p><Select styles={customStyles} options={client_options} placeholder={'Select Customer'} /></p>
             </form>
           <br />
-          <DatePickerCalendar date={date} onDateChange={this.onDateChange} locale={enGB} />
+          <div>
+            <h3 className="w3-padding">Time</h3>
+            <p><Select styles={customStyles} options={timeOptions} placeholder={'Select Time'} className="w3-padding" value={time} onChange={this.onTimeChange} /></p>
+          </div>
+          <br />
+                                                                                                                                                                                                                                                                                                                                                                                                                          <h3 className="w3-padding">Date</h3>
+                                                                                                                                                                                                                                                                                                                                                                                                                          <DatePickerCalendar date={date} onDateChange={this.onDateChange} locale={enGB} />
           </div>
           <div className="w3-col l6">
             <h3 className="w3-padding">Exercise Plan</h3>
@@ -201,7 +233,7 @@ class AddAppointment extends Component{
           </div>
           <br/>
           <div className="w3-padding w3-right">
-            <button class="w3-button w3-purple w3-round w3-large">Submit</button>
+            <button class="w3-button w3-purple w3-round w3-large" onClick={this.onSubmitClick}>Submit</button>
           </div>
         </div>
       </>
