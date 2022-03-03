@@ -1,0 +1,17 @@
+alerts:
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+name: pocketrainer-frontend
+region: tor
+static_sites:
+- build_command: npm run build
+  environment_slug: node-js
+  github:
+    branch: master
+    deploy_on_push: true
+    repo: bci-innovation-labs/pocketrainer-frontend
+  name: pocketrainer-frontend
+  catchall_document: index.html # https://www.linkedin.com/pulse/deploy-reactjs-application-digitalocean-john-dave-decano/
+  routes:
+  - path: /
+  source_dir: /
