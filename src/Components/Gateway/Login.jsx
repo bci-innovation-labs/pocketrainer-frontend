@@ -1,5 +1,5 @@
 import { React } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
@@ -16,8 +16,8 @@ export default function Login(props) {
                     <div className="w3-row">
                        <div className="w3-col s4 w3-container">
                        </div>
-                       <div className="w3-col s4" style={{height:"100px"}}>
-                          <img src="LogoWthOutBg.png" style={{width:"100%",marginTop:"17px", marginBottom:"17px"}} className="w3-centered"/>
+                       <div className="w3-col s4 w3-padding" style={{height:"100px"}}>
+                          <img src="LogoWthOutBg.png"style={{width:"100%",marginTop:"17px"}} className="w3-centered"/>
                        </div>
                        <div className="w3-col s4 w3-container">
                        </div>
@@ -40,9 +40,7 @@ export default function Login(props) {
                        <button className="w3-btn w3-green w3-block w3-margin-bottom w3-round-large">LOGIN</button>
                        <br />
                     <p>
-                       Don't have an account?
-                       <Link to="/register" className="w3-text-orange">
-                        Join free today</Link>
+                       Don't have an account? <Link to="/register" className="w3-text-orange "> Join free today</Link>
                     </p>
                     </p>
                  </div>
@@ -50,7 +48,6 @@ export default function Login(props) {
               <div className="w3-third w3-container">
               </div>
               <div className="w3-third w3-container">
-                 <button className="w3-btn w3-green w3-right w3-margin-bottom w3-round-large">SIGN UP</button>
               </div>
            </div>
            <br />

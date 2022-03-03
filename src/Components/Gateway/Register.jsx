@@ -1,4 +1,5 @@
 import { React } from "react";
+import { Link } from "react-router-dom";
 
 
 export default function Register(props) {
@@ -23,7 +24,7 @@ export default function Register(props) {
                         <div className="w3-col s4 w3-container">
                         </div>
                         <div className="w3-col s4" style={{height:"100px"}}>
-                           <img src="LogoWthOutBg.png" style={{width:"100%",marginTop:"17px"}} className="w3-centered"/>
+                           <img src="LogoWthOutBg.png" className="w3-margin"style={{width:"100%",marginTop:"17px", marginBottom: "25px"}} className="w3-centered"/>
                         </div>
                         <div className="w3-col s4 w3-container">
                         </div>
@@ -51,6 +52,9 @@ export default function Register(props) {
                      <p>
                         <button className="w3-btn w3-green w3-block w3-margin-bottom w3-round-large">REGISTER</button>
                         <button className="w3-btn w3-red w3-block w3-margin-bottom w3-round-large">CANCEL</button>
+                        <p>
+                        Already have an account?. <Link to="/login" className="w3-text-orange">Login Now</Link>
+                        </p>
                      </p>
                   </div>
                </div>
