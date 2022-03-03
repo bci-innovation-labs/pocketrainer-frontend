@@ -11,6 +11,7 @@ import Index from "./Components/Gateway/Index";
 import Login from "./Components/Gateway/Login";
 import ClientList from "./Components/Clients/ClientList";
 import ClientProfile from "./Components/Clients/ClientProfile";
+import EditClientProfile from "./Components/Clients/EditClientProfile";
 import ClientDetails from "./Components/Clients/ClientDetails";
 import Register from "./Components/Gateway/Register";
 import NotFoundError from "./Components/Misc/NotFoundError";
@@ -30,6 +31,7 @@ function App() {
                     <TopNavigation />
                 </div>
                 <Routes>
+                    <Route path="/edit-profile" element={<EditClientProfile/>}/>
                     <Route path="/add-appointment" element={<AddAppointment/>}/>
                     <Route path="/appointment-details" element={<AppointmentDetails/>}/>
                     <Route path="/client-profile" element={<ClientProfile/>}/>
