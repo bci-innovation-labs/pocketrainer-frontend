@@ -8,16 +8,20 @@ import { DatePickerCalendar } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
 import { getDay } from 'date-fns'
 import Select from 'react-select'
-import { groupExerciseOptions, chestMuscleExerciseOptions, armMuscleExerciseOptions, legMuscleExerciseOptions, abdominalMuscleExerciseOptions } from '../../Constants/Fields'
+import { groupExerciseOptions, chestMuscleExerciseOptions, armMuscleExerciseOptions, legMuscleExerciseOptions, abdominalMuscleExerciseOptions, timeOptions } from '../../Constants/Fields'
 
-
+  function addMinutes(dt, minutes) {
+      return new Date(dt.getTime() + minutes*60000);
+  }
 
 class AddAppointment extends Component{
   constructor(props){
     super(props)
     this.state = {
       specific_exercise_is_disabled: true,
-      date:new Date(localStorage.getItem("USER_PICKED_DATE")),
+      //date:new Date(localStorage.getItem("USER_PICKED_DATE")),
+      date:new Date(),
+      time: null,
       client_options : [
       { value: '1', label: 'Adam' },
       { value: '2', label: 'Jacob' },
@@ -26,20 +30,18 @@ class AddAppointment extends Component{
       specificExerciseOptions : [],
       reps : "",
       series : "",
-      routines : [
-        {
-          groupExercise : { value: 'chest_muscle', label: 'Chest Muscle' },
-          specificExercise : { value: 'a', label: 'A' },
-          reps : 50,
-          series : 4,
-
-        }
-      ]
+      routines : [],
+      groupExercise:"",
+      specificExercise:"",
     };
     this.onDateChange = this.onDateChange.bind(this)
     this.onGroupExerciseChange = this.onGroupExerciseChange.bind(this)
     this.onRepsChange = this.onRepsChange.bind(this)
     this.onSeriesChange = this.onSeriesChange.bind(this)
+    this.onAddClick = this.onAddClick.bind(this)
+    this.onSpecificExerciseChange = this.onSpecificExerciseChange.bind(this)
+    this.onTimeChange = this.onTimeChange.bind(this)
+    this.onSubmitClick = this.onSubmitClick.bind(this)
   }
 
   onDateChange(pickedDate){
@@ -49,6 +51,13 @@ class AddAppointment extends Component{
     })
     localStorage.setItem("USER_PICKED_DATE", pickedDate);
   }
+
+  onTimeChange(e){
+  console.log(e)
+  this.setState({
+    time: e,
+  })
+}
 
   onGroupExerciseChange(e){
     console.log(e)
@@ -72,6 +81,13 @@ class AddAppointment extends Component{
     })
   }
 
+  onSpecificExerciseChange(e){
+    console.log(e)
+    this.setState({
+      specificExercise:e,
+    })
+  }
+
   onRepsChange(e){
     const value = e.target.value;
     this.setState({
@@ -86,15 +102,43 @@ class AddAppointment extends Component{
     })
   }
 
+  onAddClick(){
+    const { reps, series, groupExercise, specificExercise, routines } = this.state
+    const row = { groupExercise : groupExercise, specificExercise : specificExercise, reps : reps, series : series }
+    console.log(row)
+    routines.push(row)
+    this.setState ({
+      routines:routines,
+      reps:"",
+      series:"",
+      groupExercise:"",
+      specificExercise:"",
+    },()=>{
+      console.log(this.state)
+     })
+  }
+
+  onSubmitClick(e){
+    const { date, time } = this.state
+
+    const dt = new Date(date.toDateString());
+
+    const timeValue = time["value"]
+
+    const minutes = 60 * timeValue;
+
+    const newDate = addMinutes(dt, minutes);
+
+       console.log("your date is:", newDate);
+
+    }
+
   render(){
-    const { client_options, specificExerciseOptions, reps, series, routines } = this.state
+    const { client_options, specificExerciseOptions, reps, series, routines, specificExercise, groupExercise } = this.state
     console.log(routines)
     const { onDateChange } = this.state
-    const { date, specific_exercise_is_disabled } = this.state
+    const { date, time, specific_exercise_is_disabled } = this.state
     //*new Date().setDate(new Date().getDate() - 1* === Yesterday Day
-    const modifiers = {
-      disabled: date => (date <  new Date().setDate(new Date().getDate() - 1)) || (getDay(date) === 0),
-    }
 
     //https://stackoverflow.com/a/51844542
     //https://codesandbox.io/s/react-select-css-styling-chy20?from-embed=&file=/src/index.js
@@ -142,19 +186,25 @@ class AddAppointment extends Component{
               <p><Select styles={customStyles} options={client_options} placeholder={'Select Customer'} /></p>
             </form>
           <br />
-          <DatePickerCalendar date={date} onDateChange={this.onDateChange} locale={enGB} modifiers={modifiers} />
+          <div>
+            <h3 className="w3-padding">Time</h3>
+            <p><Select styles={customStyles} options={timeOptions} placeholder={'Select Time'} className="w3-padding" value={time} onChange={this.onTimeChange} /></p>
+          </div>
+          <br />
+                                                                                                                                                                                                                                                                                                                                                                                                                          <h3 className="w3-padding">Date</h3>
+                                                                                                                                                                                                                                                                                                                                                                                                                          <DatePickerCalendar date={date} onDateChange={this.onDateChange} locale={enGB} />
           </div>
           <div className="w3-col l6">
             <h3 className="w3-padding">Exercise Plan</h3>
             {/* start form */}
             <form className="w3-container">
-              <p><Select styles={customStyles} options={groupExerciseOptions} placeholder={'Group Exercise'} onChange={this.onGroupExerciseChange} /></p>
-              <p><Select styles={customStyles} options={specificExerciseOptions} placeholder={'Specific Exercise'} isDisabled={specific_exercise_is_disabled} /></p>
+              <p><Select styles={customStyles} options={groupExerciseOptions} placeholder={'Group Exercise'} onChange={this.onGroupExerciseChange} value={groupExercise} /></p>
+              <p><Select styles={customStyles} options={specificExerciseOptions} placeholder={'Specific Exercise'} onChange={this.onSpecificExerciseChange} isDisabled={specific_exercise_is_disabled} value={specificExercise} /></p>
               <p>
                   <input className="w3-input w3-border w3-black w3-border-purple w3-round" name="first" type="text" placeholder="Reps" onChange={this.onRepsChange} value={reps} /></p>
                   <p>
                   <input className="w3-input w3-border w3-black w3-border-purple w3-round" name="last" type="text" placeholder="Series" onChange={this.onSeriesChange} value={series} /></p>
-              <p><button className="w3-button w3-block w3-white w3-round-large w3-text-purple"> <b><i className="fa fa-plus"></i> Add</b></button></p>
+              <p><button className="w3-button w3-block w3-white w3-round-large w3-text-purple" type="button" onClick={this.onAddClick}> <b><i className="fa fa-plus"></i> Add</b></button></p>
             </form>
             {/* end form */}
           {/* begin table */}
@@ -177,19 +227,13 @@ class AddAppointment extends Component{
               </tr>
 
               ))}
-            <tr>
-              <td>Arm</td>
-              <td>Push Up</td>
-              <td>50</td>
-              <td>4</td>
-            </tr>
           </table>
           </div>
           {/* end table */}
           </div>
           <br/>
           <div className="w3-padding w3-right">
-            <button class="w3-button w3-purple w3-round w3-large">Submit</button>
+            <button class="w3-button w3-purple w3-round w3-large" onClick={this.onSubmitClick}>Submit</button>
           </div>
         </div>
       </>
