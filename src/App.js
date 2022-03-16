@@ -19,7 +19,9 @@ import TrainerDashboard from "./Components/Dashboard/TrainerDashboard";
 import ClientDashboard from "./Components/Dashboard/ClientDashboard";
 import AppointmentDetails from "./Components/Appointments/Details";
 import AddAppointment from "./Components/Appointments/Add";
-
+import TrainerProfile from "./Components/Trainer/TrainerProfile";
+import ClientNotification from "./Components/Clients/ClientNotification";
+import TrainerProfileEdit from "./Components/Trainer/TrainerProfileEditProfile";
 
 
 
@@ -32,6 +34,9 @@ function App() {
                 </div>
                 <Routes>
                     <Route path="/edit-profile" element={<EditClientProfile/>}/>
+                    <Route path="/trainer-profile-edit" element={<TrainerProfileEdit/>}/>
+                    <Route path="/client-notification" element={<ClientNotification/>}/>
+                    <Route path="/trainer-profile" element={<TrainerProfile/>}/>
                     <Route path="/add-appointment" element={<AddAppointment/>}/>
                     <Route path="/appointment-details" element={<AppointmentDetails/>}/>
                     <Route path="/client-profile" element={<ClientProfile/>}/>

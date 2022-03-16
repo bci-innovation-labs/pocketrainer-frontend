@@ -53,4 +53,10 @@ export const timeOptions = [
 {value: 22, label:"10:00PM"},
 {value: 23, label:"11:00PM"},
 {value: 24, label:"12:00AM"},
-]
+];
+export const sessionExerciseOptions = [
+{ value: '1', label: 'Session 1' },
+{ value: '2', label: 'Session 2' },
+{ value: '3', label: 'Session 3' },
+{ value: '4', label: 'Session 4' }
+];
