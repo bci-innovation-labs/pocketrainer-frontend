@@ -13,6 +13,7 @@ import ClientList from "./Components/Clients/ClientList";
 import ClientProfile from "./Components/Clients/ClientProfile";
 import EditClientProfile from "./Components/Clients/EditClientProfile";
 import ClientDetails from "./Components/Clients/ClientDetails";
+import Processing from "./Components/Gateway/Processing";
 import Register from "./Components/Gateway/Register";
 import NotFoundError from "./Components/Misc/NotFoundError";
 import TrainerDashboard from "./Components/Dashboard/TrainerDashboard";
@@ -33,6 +34,7 @@ function App() {
                     <TopNavigation />
                 </div>
                 <Routes>
+                    <Route path="/processing" element={<Processing/>}/>
                     <Route path="/edit-profile" element={<EditClientProfile/>}/>
                     <Route path="/trainer-profile-edit" element={<TrainerProfileEdit/>}/>
                     <Route path="/client-notification" element={<ClientNotification/>}/>
