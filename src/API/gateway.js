@@ -1,4 +1,4 @@
-import { INSTRUMENT_RETRIEVE_UPTADE_API, INSTRUMENT_LIST_CREATE_API } from "../constants";
+import { INSTRUMENT_RETRIEVE_UPTADE_API, INSTRUMENT_LIST_CREATE_API } from "../Constants";
 import axios from "axios";
 
 export function getInstruments(onSucces, onError, onDone){

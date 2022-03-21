@@ -4,6 +4,8 @@ import { useHistory ,useLocation } from 'react-router-dom';
 import useLocalStorage from "../../Utility/useLocalStorage";
 import { isEmpty } from 'lodash';
 import { TRAINER_ROLE_ID } from "../../Constants/App";
+import { BIOMETRICS_CLOUD_LOGIN_URL } from "../../Constants/App"
+
 
 function TopNavigation() {
     const [showMenu, setShowMenu] = useState(false);
@@ -25,10 +27,10 @@ function TopNavigation() {
                           className="w3-bar-item w3-large">Close &times;</button>
                     {isEmpty(profile)
                         ?<>
-                            <a href="/login" className="w3-bar-item w3-button w3-text-black">
+                            <a href={BIOMETRICS_CLOUD_LOGIN_URL} className="w3-bar-item w3-button w3-text-black">
                                 <i className="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Login
                             </a>
-                            <a href="/register" className="w3-bar-item w3-button w3-text-black">
+                            <a href={BIOMETRICS_CLOUD_LOGIN_URL} className="w3-bar-item w3-button w3-text-black">
                                 <i className="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;Register
                             </a>
                         </>

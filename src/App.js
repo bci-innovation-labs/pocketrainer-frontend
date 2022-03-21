@@ -9,6 +9,7 @@ import {
 import TopNavigation from "./Components/Misc/TopNavigation";
 import Index from "./Components/Gateway/Index";
 import Login from "./Components/Gateway/Login";
+import ProcessingSetRole from "./Components/Gateway/ProcessingSetRole";
 import ClientList from "./Components/Clients/ClientList";
 import ClientProfile from "./Components/Clients/ClientProfile";
 import EditClientProfile from "./Components/Clients/EditClientProfile";
@@ -26,6 +27,7 @@ import TrainerProfileEdit from "./Components/Trainer/TrainerProfileEditProfile";
 
 
 
+
 function App() {
     return (
         <>
@@ -34,6 +36,7 @@ function App() {
                     <TopNavigation />
                 </div>
                 <Routes>
+                    <Route path="/processing/set-role" element={<ProcessingSetRole/>}/>
                     <Route path="/processing" element={<Processing/>}/>
                     <Route path="/edit-profile" element={<EditClientProfile/>}/>
                     <Route path="/trainer-profile-edit" element={<TrainerProfileEdit/>}/>
