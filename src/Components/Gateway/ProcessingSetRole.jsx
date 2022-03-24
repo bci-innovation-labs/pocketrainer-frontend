@@ -47,10 +47,30 @@ export default function ProcessingSetRole(props) {
   }
     return (
         <>
-            <h1>Processing set Role</h1>
-            <h2>Pick a role</h2>
-            <button onClick={onTrainerButtonClick} className="w3-green w3-btn">Trainer (2)</button>
-            <button onClick={onClientButtonClick} className="w3-green w3-btn">Client (3)</button>
+            <h1 className="w3-center">Processing set Role</h1>
+            <h4 className="w3-center w3-margin-bottom ">Pick a role</h4>
+            <div class="w3-row-padding">
+              <div class="w3-half w3-margin-bottom">
+                <ul class="w3-ul w3-border w3-center w3-hover-shadow">
+                  <li class="w3-purple w3-xlarge w3-padding-32">Trainer</li>
+                  <li class="w3-padding-16"><img src="../male3.png" className="w3-center" style={{width:"25%", height:"25%"}}/></li>
+                  <li class="w3-padding-24">
+                    <button onClick={onTrainerButtonClick} className="w3-purple w3-btn w3-padding-large">Select</button>
+                  </li>
+                </ul>
+              </div>
+              <div class="w3-half w3-margin-bottom">
+                <ul class="w3-ul w3-border w3-center w3-hover-shadow">
+                  <li class="w3-purple w3-xlarge w3-padding-32">Customer</li>
+                  <li class="w3-padding-16"><img src="../man2.png" className="w3-center" style={{width:"25%", height:"25%"}}/></li>
+                  <li class="w3-padding-24">
+                    <button onClick={onClientButtonClick} className="w3-purple w3-btn w3-padding-large">Select</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+
         </>
     );
 }
