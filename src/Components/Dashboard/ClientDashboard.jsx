@@ -5,12 +5,40 @@ import { format } from 'date-fns'
 import { enGB } from 'date-fns/locale'
 import { DatePickerCalendar } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
+import { getProfileDetail } from "../../API/profile";
+import { getAppoimentList } from "../../API/appoiments";
+
+
 
 const percentage = 66;
 
-
 export default function ClientDashboard(props){
-    const [date, setDate] = useState()
+    const [profile, setProfile] =useState(JSON.parse(localStorage.getItem("profile")))
+    const [appoiments, setAppoiments] = useState([])
+
+    function onGetAppoimentSucces(response){
+      console.log(response.data)
+
+     }
+    function onGetAppoimentError(err){
+     }
+    function onGetAppoimentDone(){
+     }
+
+    getAppoimentList(onGetAppoimentSucces, onGetAppoimentError, onGetAppoimentDone)
+
+    function onGetProfileSucces(response){
+       const profile = JSON.stringify(response.data)
+       localStorage.setItem("profile", profile)
+     }
+
+    function onGetProfileError(err){
+     }
+
+    function onGetProfileDone(){
+     }
+
+     getProfileDetail(onGetProfileSucces, onGetProfileError, onGetProfileDone)
     return (
         <>
         <div className="w3-row">
@@ -19,7 +47,7 @@ export default function ClientDashboard(props){
                  <img src="DashboardImg1.png" className="w3-round-xxlarge" style={{width:"100%"}}/>
                  <div className="w3-padding w3-display-topleft">
                     <p>Welcome back</p>
-                    <p><span className="w3-xxlarge"><strong>Mark Jonson</strong></span></p>
+                    <p><span className="w3-xxlarge"><strong>{profile.name}</strong></span></p>
                     <p>Glad to see you again</p>
                     <p>Ask me anything</p>
                  </div>
@@ -179,7 +207,7 @@ export default function ClientDashboard(props){
           <br />
            </div>
            <div className="w3-col l5 w3-padding">
-              <DatePickerCalendar date={date} onDateChange={setDate} locale={enGB} />
+              {/* <DatePickerCalendar date={date} onDateChange={setDate} locale={enGB} /> */}
            </div>
         </div>
         <div className="w3-margin-bottom">
