@@ -1,4 +1,4 @@
-import { React , useState } from "react";
+import { React , useState, useEffect } from "react";
 import { CircularProgressbar, CircularProgressbarWithChildren} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { format } from 'date-fns'
@@ -16,16 +16,29 @@ export default function ClientDashboard(props){
     const [profile, setProfile] =useState(JSON.parse(localStorage.getItem("profile")))
     const [appoiments, setAppoiments] = useState([])
 
-    function onGetAppoimentSucces(response){
-      console.log(response.data)
 
+    function onGetAppoimentSucces(response){
+      setAppoiments(response.data.results)
+      console.log(response.data)
      }
     function onGetAppoimentError(err){
      }
     function onGetAppoimentDone(){
      }
 
-    getAppoimentList(onGetAppoimentSucces, onGetAppoimentError, onGetAppoimentDone)
+      useEffect(() => {
+       // This gets called after every render, by default
+       // (the first one, and every one after that)
+      setTimeout(() => {
+        getAppoimentList(onGetAppoimentSucces, onGetAppoimentError, onGetAppoimentDone)
+      }, 100)
+
+
+       // If you want to implement componentWillUnmount,
+       // return a function from here, and React will call
+       // it prior to unmounting.
+       return () => console.log('unmounting...');
+     }, [])
 
     function onGetProfileSucces(response){
        const profile = JSON.stringify(response.data)
@@ -89,14 +102,14 @@ export default function ClientDashboard(props){
           <div className="w3-col l7 w3-padding">
             <h1 className="w3-padding w3-margin-left">Upcoming appointment</h1>
             {/* ROW 1 */}
+          {appoiments.map((appoiment) => (
             <div ClassName="w3-row w3-margin-left">
                <div className="w3-col l4 w3-center">
                  <div className="w3-hide-large">
-                    <p>08:00 14/02/22</p>
+                    <p>{appoiment.date_time}</p>
                  </div>
                  <div className="w3-hide-small w3-hide-medium">
-                    <p>08:00</p>
-                    <p>14/02/22</p>
+                    <p>{appoiment.date_time}</p>
                  </div>
                </div>
                <div className="w3-col l6">
@@ -105,105 +118,19 @@ export default function ClientDashboard(props){
                         <img src="IconExample.png" className="w3-image w3-circle" style={{width:"50%"}}/>
                      </div>
                      <div className="w3-col s6 w3-text-indigo w3-margin-top">
-                        <span className="w3-large w3-text-indigo w3-margin-left"><strong>Arm Muscle</strong></span>
-                        <p>Trainer : Anthony</p>
+                        <span className="w3-large w3-text-indigo w3-margin-left"><strong>{appoiment.ex_plan}</strong></span>
+                        <p>Trainer : {appoiment.trainer_name}</p>
                      </div>
                      <div className="w3-col s2 w3-text-indigo w3-margin-top">
-                        <p>GoodLife</p>
+                        <p>{appoiment.location}</p>
                      </div>
                   </div>
                </div>
                <div className="w3-col l2">
                </div>
             </div>
+            ))}
             {/* end ROW1 */}
-            {/* ROW 2 */}
-            <div className="w3-row w3-margin-top" style={{marginTop:"64px"}}>
-               <div className="w3-col l4 w3-center w3-margin-top">
-                 <div className="w3-hide-large">
-                    <p>08:00 14/02/22</p>
-                 </div>
-                 <div className="w3-hide-small w3-hide-medium">
-                    <p>08:00</p>
-                    <p>14/02/22</p>
-                 </div>
-               </div>
-               <div className="w3-col l6 w3-margin-top">
-                  <div className="w3-container w3-round-xxlarge" style={{backgroundColor:"#E9EAF4"}}>
-                     <div className="w3-col s4 w3-margin-top">
-                        <img src="IconExample.png" className="w3-image w3-circle" style={{width:"50%"}}/>
-                     </div>
-                     <div className="w3-col s6 w3-text-indigo w3-margin-top w3-margin-top">
-                        <span className="w3-large w3-text-indigo w3-margin-left"><strong>Arm Muscle</strong></span>
-                        <p>Trainer : Anthony</p>
-                     </div>
-                     <div className="w3-col s2 w3-text-indigo w3-margin-top ">
-                        <p>GoodLife</p>
-                     </div>
-                  </div>
-               </div>
-               <div className="w3-col l2 w3-margin-top">
-               </div>
-            </div>
-            {/* end ROW2 */}
-            {/* ROW 3 */}
-            <div className="w3-row w3-margin-top" style={{marginTop:"64px"}}>
-               <div className="w3-col l4 w3-center">
-                 <div className="w3-hide-large">
-                    <p>08:00 14/02/22</p>
-                 </div>
-                 <div className="w3-hide-small w3-hide-medium">
-                    <p>08:00</p>
-                    <p>14/02/22</p>
-                 </div>
-               </div>
-               <div className="w3-col l6">
-                  <div className="w3-container w3-round-xxlarge" style={{backgroundColor:"#E9EAF4"}}>
-                     <div className="w3-col s4 w3-margin-top">
-                        <img src="IconExample.png" className="w3-image w3-circle" style={{width:"50%"}}/>
-                     </div>
-                     <div className="w3-col s6 w3-text-indigo w3-margin-top w3-margin-top">
-                        <span className="w3-large w3-text-indigo w3-margin-left"><strong>Arm Muscle</strong></span>
-                        <p>Trainer : Anthony</p>
-                     </div>
-                     <div className="w3-col s2 w3-text-indigo w3-margin-top ">
-                        <p>GoodLife</p>
-                     </div>
-                  </div>
-               </div>
-               <div className="w3-col l2 w3-margin-top">
-               </div>
-            </div>
-            {/* end ROW3 */}
-            {/* ROW 4 */}
-            <div className="w3-row w3-margin-top" style={{marginTop:"64px"}}>
-               <div className="w3-col l4 w3-center">
-                 <div className="w3-hide-large">
-                    <p>08:00 14/02/22</p>
-                 </div>
-                 <div className="w3-hide-small w3-hide-medium">
-                    <p>08:00</p>
-                    <p>14/02/22</p>
-                 </div>
-               </div>
-               <div className="w3-col l6">
-                  <div className="w3-container w3-round-xxlarge" style={{backgroundColor:"#E9EAF4"}}>
-                     <div className="w3-col s4 w3-margin-top">
-                        <img src="IconExample.png" className="w3-image w3-circle" style={{width:"50%"}}/>
-                     </div>
-                     <div className="w3-col s6 w3-text-indigo w3-margin-top w3-margin-top">
-                        <span className="w3-large w3-text-indigo w3-margin-left"><strong>Arm Muscle</strong></span>
-                        <p>Trainer : Anthony</p>
-                     </div>
-                     <div className="w3-col s2 w3-text-indigo w3-margin-top ">
-                        <p>GoodLife</p>
-                     </div>
-                  </div>
-               </div>
-               <div className="w3-col l2 w3-margin-top">
-               </div>
-            </div>
-            {/* end ROW4 */}
           <br />
            </div>
            <div className="w3-col l5 w3-padding">
