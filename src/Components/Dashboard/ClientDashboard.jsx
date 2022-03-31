@@ -3,10 +3,12 @@ import { CircularProgressbar, CircularProgressbarWithChildren} from 'react-circu
 import 'react-circular-progressbar/dist/styles.css';
 import { format } from 'date-fns'
 import { enGB } from 'date-fns/locale'
-import { DatePickerCalendar } from 'react-nice-dates'
+import { DatePickerCalendar, Calendar } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
+import { isSameDay } from 'date-fns'
 import { getProfileDetail } from "../../API/profile";
 import { getAppoimentList } from "../../API/appoiments";
+import moment from 'moment';
 
 
 
@@ -15,12 +17,32 @@ const percentage = 66;
 export default function ClientDashboard(props){
     const [profile, setProfile] =useState(JSON.parse(localStorage.getItem("profile")))
     const [appoiments, setAppoiments] = useState([])
+    const [selectedDates, setSelectedDates] = useState([])
+
+    const modifiers = {
+  selected: date => selectedDates.some(selectedDate => isSameDay(selectedDate, date))
+}
+    const handleDayClick = date => {
+      setSelectedDates([...selectedDates, date])
+    }
+
 
 
     function onGetAppoimentSucces(response){
       setAppoiments(response.data.results)
-      console.log(response.data)
+      var dates = []
+
+      for (let x of response.data.results){
+        console.log(x.date_time)
+        // var y = moment(x.date_time).date()
+        var y = new Date(x.date_time);
+        dates.push(y)
+      }
+      console.log(y)
+
+      setSelectedDates(dates)
      }
+
     function onGetAppoimentError(err){
      }
     function onGetAppoimentDone(){
@@ -106,10 +128,11 @@ export default function ClientDashboard(props){
             <div ClassName="w3-row w3-margin-left">
                <div className="w3-col l4 w3-center">
                  <div className="w3-hide-large">
-                    <p>{appoiment.date_time}</p>
+                    <p>{moment(appoiment.date_time).format('LT')}</p>
+                    <p>{moment(appoiment.date_time).format('ll')}</p>
                  </div>
                  <div className="w3-hide-small w3-hide-medium">
-                    <p>{appoiment.date_time}</p>
+                 <p>{moment(appoiment.date_time).format('LLL')}</p>
                  </div>
                </div>
                <div className="w3-col l6">
@@ -134,7 +157,7 @@ export default function ClientDashboard(props){
           <br />
            </div>
            <div className="w3-col l5 w3-padding">
-              {/* <DatePickerCalendar date={date} onDateChange={setDate} locale={enGB} /> */}
+             <Calendar onDayClick={handleDayClick} modifiers={modifiers} locale={enGB} />
            </div>
         </div>
         <div className="w3-margin-bottom">
