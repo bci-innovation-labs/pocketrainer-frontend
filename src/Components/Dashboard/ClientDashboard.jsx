@@ -4,6 +4,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { format } from 'date-fns'
 import { enGB } from 'date-fns/locale'
 import { DatePickerCalendar, Calendar } from 'react-nice-dates'
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid} from 'recharts';
 import 'react-nice-dates/build/style.css'
 import { isSameDay } from 'date-fns'
 import { getProfileDetail } from "../../API/profile";
@@ -12,7 +13,14 @@ import moment from 'moment';
 
 
 
-const percentage = 66;
+const data = [
+  { name: '6', protein: 4000, fat: 2400 },
+  { name: '7', protein: 3000, fat: 1398 },
+  { name: '8', protein: 2000, fat: 9800 },
+  { name: '10', protein: 2780, fat: 3908 },
+  { name: '11', protein: 1890, fat: 4800 },
+  { name: '12', protein: 2390, fat: 3800 }
+];
 
 export default function ClientDashboard(props){
     const [profile, setProfile] =useState(JSON.parse(localStorage.getItem("profile")))
@@ -99,21 +107,22 @@ export default function ClientDashboard(props){
                  </div>
               </div>
               <div className="w3-row">
-                 <div className="w3-col m6">
+                 <div className="w3-col m3">
                     <div className="w3-margin w3-center w3-round-xxlarge w3-padding">
-                       <p className="w3-xxlarge">Sessions</p>
-                       <p className="w3-xxlarge">123</p>
+                       <p className="w3-xlarge">Summary</p>
                     </div>
                  </div>
-                 <div className="w3-col m6 w3-padding w3-center">
-                    <CircularProgressbarWithChildren value={72}>
+                 <div className="w3-col m9 w3-padding w3-center">
+                 <LineChart width={350} height={275} data={data} className="" style={{width:"100%"}}>
+                   <Line type="monotone" dataKey="fat" stroke="#84d88e" />
+                   <Line type="monotone" dataKey="protein" stroke="#e00991" />
+                    <XAxis dataKey="name" />
+                    <CartesianGrid stroke="#fff" />
+                    <Tooltip />
+                 </LineChart>
                        {/* Put any JSX content in here that you'd like. It'll be vertically and horizonally centered. */}
                        <div style={{ fontSize: 12, marginTop: -5 }}>
-                       <h3>Main goal</h3>
-                       <span className="w3-xxlarge"><strong>72%</strong></span>
-                       <p>Total Score</p>
                  </div>
-                 </CircularProgressbarWithChildren>
                  <br /> <br />
               </div>
            </div>
@@ -148,6 +157,7 @@ export default function ClientDashboard(props){
                         <p>{appoiment.location}</p>
                      </div>
                   </div>
+                <br />
                </div>
                <div className="w3-col l2">
                </div>
