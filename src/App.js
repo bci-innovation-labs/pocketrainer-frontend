@@ -51,7 +51,7 @@ function App() {
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/dashboard-client" element={<ClientDashboard/>}/>
                     <Route path="/dashboard-trainer" element={<TrainerDashboard/>}/>
-                    <Route exact path="/" element={<Index/>}/>
+                    <Route exact path="/" element={<Login/>}/>
                     <Route path="*" element={<NotFoundError/>}/>
                 </Routes>
                 <div>

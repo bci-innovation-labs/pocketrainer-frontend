@@ -1,5 +1,7 @@
 import { React } from "react";
 import { Link } from "react-router-dom";
+import { BIOMETRICS_CLOUD_LOGIN_URL } from "../../Constants/App"
+
 
 
 
@@ -28,19 +30,11 @@ export default function Login(props) {
                     <h1><strong>Login to your account</strong></h1>
                     <br />
                     <p>
-                       <label> Email </label>
-                       <input className="w3-input w3-round-xlarge" type="email" name="email"/>
-                    </p>
-                    <p>
-                       <label> Password </label>
-                       <input className="w3-input w3-round-xlarge" type="password" name="password"/>
-                    </p>
-                    <p>
                        <br />
-                       <button className="w3-btn w3-green w3-block w3-margin-bottom w3-round-large">LOGIN</button>
+                       <a href={BIOMETRICS_CLOUD_LOGIN_URL} className="w3-btn w3-green w3-block w3-margin-bottom w3-round-large">SIGN IN WITH <strong>BIOMETRICSCLOUD</strong></a>
                        <br />
                     <p>
-                       Don't have an account? <Link to="/register" className="w3-text-orange "> Join free today</Link>
+                       Don't have an account? <a href="https://biometricscloud.app" className="w3-text-orange "> Join free today</a>
                     </p>
                     </p>
                  </div>

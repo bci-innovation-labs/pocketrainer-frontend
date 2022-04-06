@@ -8,7 +8,7 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid} from 'recharts';
 import 'react-nice-dates/build/style.css'
 import { isSameDay } from 'date-fns'
 import { getProfileDetail } from "../../API/profile";
-import { getAppoimentList } from "../../API/appoiments";
+import { getAppoimentList, postGetAppoimentsIdCall } from "../../API/appoiments";
 import moment from 'moment';
 
 
@@ -32,9 +32,23 @@ export default function ClientDashboard(props){
 }
     const handleDayClick = date => {
       setSelectedDates([...selectedDates, date])
+      console.log(date)
+      let data = {
+        date:date.toISOString()
+      }
+      postGetAppoimentsIdCall(data, onPostGetAppoimentsIdSucces, onPostGetAppoimentsIdError, onPostGetAppoimentsIdDone)
     }
 
+    function onPostGetAppoimentsIdSucces(response){
+    console.log(response.data)
 
+    }
+    function onPostGetAppoimentsIdError(err){
+
+    }
+    function onPostGetAppoimentsIdDone(){
+
+    }
 
     function onGetAppoimentSucces(response){
       setAppoiments(response.data.results)
