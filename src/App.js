@@ -43,7 +43,7 @@ function App() {
                     <Route path="/client-notification" element={<ClientNotification/>}/>
                     <Route path="/trainer-profile" element={<TrainerProfile/>}/>
                     <Route path="/add-appointment" element={<AddAppointment/>}/>
-                    <Route path="/appointment-details" element={<AppointmentDetails/>}/>
+                    <Route path="/appoiment/:id" element={<AppointmentDetails/>}/>
                     <Route path="/client-profile" element={<ClientProfile/>}/>
                     <Route path="/client-details" element={<ClientDetails/>}/>
                     <Route path="/clients" element={<ClientList/>}/>

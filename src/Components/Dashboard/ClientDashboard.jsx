@@ -10,6 +10,8 @@ import { isSameDay } from 'date-fns'
 import { getProfileDetail } from "../../API/profile";
 import { getAppoimentList, postGetAppoimentsIdCall } from "../../API/appoiments";
 import moment from 'moment';
+import { Link } from "react-router-dom";
+
 
 
 
@@ -21,6 +23,8 @@ const data = [
   { name: '11', protein: 1890, fat: 4800 },
   { name: '12', protein: 2390, fat: 3800 }
 ];
+
+
 
 export default function ClientDashboard(props){
     const [profile, setProfile] =useState(JSON.parse(localStorage.getItem("profile")))
@@ -164,7 +168,7 @@ export default function ClientDashboard(props){
                         <img src="IconExample.png" className="w3-image w3-circle" style={{width:"50%"}}/>
                      </div>
                      <div className="w3-col s6 w3-text-indigo w3-margin-top">
-                        <span className="w3-large w3-text-indigo w3-margin-left"><strong>{appoiment.ex_plan}</strong></span>
+                        <span className="w3-large w3-text-indigo w3-margin-left"><Link to={`/appoiment/${appoiment.id}`}><strong>{appoiment.ex_plan}</strong></Link></span>
                         <p>Trainer : {appoiment.trainer_name}</p>
                      </div>
                      <div className="w3-col s2 w3-text-indigo w3-margin-top">
@@ -181,7 +185,7 @@ export default function ClientDashboard(props){
           <br />
            </div>
            <div className="w3-col l5 w3-padding">
-             <Calendar onDayClick={handleDayClick} modifiers={modifiers} locale={enGB} />
+             <Calendar modifiers={modifiers} locale={enGB} disabled={true}/>
            </div>
         </div>
         <div className="w3-margin-bottom">
