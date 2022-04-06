@@ -19,7 +19,7 @@ import Register from "./Components/Gateway/Register";
 import NotFoundError from "./Components/Misc/NotFoundError";
 import TrainerDashboard from "./Components/Dashboard/TrainerDashboard";
 import ClientDashboard from "./Components/Dashboard/ClientDashboard";
-import AppointmentDetails from "./Components/Appointments/Details";
+import AppoimentDetails from "./Components/Appointments/Details";
 import AddAppointment from "./Components/Appointments/Add";
 import TrainerProfile from "./Components/Trainer/TrainerProfile";
 import ClientNotification from "./Components/Clients/ClientNotification";
@@ -43,7 +43,7 @@ function App() {
                     <Route path="/client-notification" element={<ClientNotification/>}/>
                     <Route path="/trainer-profile" element={<TrainerProfile/>}/>
                     <Route path="/add-appointment" element={<AddAppointment/>}/>
-                    <Route path="/appoiment/:id" element={<AppointmentDetails/>}/>
+                    <Route path="/appoiment/:id" element={<AppoimentDetails/>}/>
                     <Route path="/client-profile" element={<ClientProfile/>}/>
                     <Route path="/client-details" element={<ClientDetails/>}/>
                     <Route path="/clients" element={<ClientList/>}/>
