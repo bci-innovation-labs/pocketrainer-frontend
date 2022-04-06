@@ -4,3 +4,4 @@ export const BIOMETRICS_CLOUD_LOGIN_URL = "http://biometricscloud.net/authorize?
 export const PROFILE_UPDATE_ENDPOINT = "http://127.0.0.1:8000/profile"
 export const LIST_CREATE_APPOIMENTS_ENDPOINT = "http://127.0.0.1:8000/appoiments"
 export const GET_APPOIMENTS_ID_ENDPOINT = "http://127.0.0.1:8000/appoiments/getId"
+export const RETRIEVE_UPDATE_DELETE_APPOIMENT_ENDPOINT = "http://127.0.0.1:8000/appoiment/:id"

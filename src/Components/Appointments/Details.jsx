@@ -9,6 +9,9 @@ import 'react-nice-dates/build/style.css'
 import "./react-nice-dates-override.css";
 import { getDay } from 'date-fns'
 
+import { getAppoimentDetails } from "../../API/appoiments";
+
+
 
 
 class AppointmentDetails extends Component{

@@ -2,7 +2,7 @@ import axios from "axios";
 import { getDefaultAxios } from "./apiHelper"
 
 
-import { LIST_CREATE_APPOIMENTS_ENDPOINT, GET_APPOIMENTS_ID_ENDPOINT } from "../Constants/App";
+import { LIST_CREATE_APPOIMENTS_ENDPOINT, GET_APPOIMENTS_ID_ENDPOINT,RETRIEVE_UPDATE_DELETE_APPOIMENT_ENDPOINT } from "../Constants/App";
 
 export function getAppoimentList(onGetAppoimentSucces, onGetAppoimentError, onGetAppoimentDone){
   const a = getDefaultAxios()
@@ -19,4 +19,12 @@ export function postGetAppoimentsIdCall(data, onPostGetAppoimentsIdSucces, onPos
   .then(onPostGetAppoimentsIdSucces)
   .catch(onPostGetAppoimentsIdError)
   .then(onPostGetAppoimentsIdDone)
+}
+
+export function getAppoimentDetails(id, onGetAppoimentDetailsSucces, onGetAppoimentDetailsError, onGetAppoimentDetailsDone){
+  const a = getDefaultAxios()
+  a.get(RETRIEVE_UPDATE_DELETE_APPOIMENT_ENDPOINT.replace(":id", id))
+  .then(onGetAppoimentDetailsSucces)
+  .catch(onGetAppoimentDetailsError)
+  .then(onGetAppoimentDetailsDone)
 }
