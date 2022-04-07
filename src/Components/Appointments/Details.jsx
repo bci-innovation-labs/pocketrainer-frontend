@@ -26,17 +26,12 @@ export default function AppoimentDetails(props){
   const modifiers = {
 selected: date => selectedDates.some(selectedDate => isSameDay(selectedDate, date))
 }
-  const handleDayClick = date => {
-    setSelectedDates([...selectedDates, date])
-    console.log(date)
-    let data = {
-      date:date.toISOString()
-    }  
-  }
-  console.log(id)
 
   function onGetAppoimentDetailsSucces(response){
-    setSelectedDates([...selectedDates, response.data.date_time])
+    var y = new Date(response.data.date_time);
+
+    setSelectedDates([...selectedDates, y])
+    setAppoiment(response.data)
   }
   function onGetAppoimentDetailsError(err){
 
@@ -52,8 +47,7 @@ selected: date => selectedDates.some(selectedDate => isSameDay(selectedDate, dat
      return () => console.log('unmounting...');
      }, [])
 
-     console.log(appoiment)
-     console.log(selectedDates)
+console.log(appoiment)
   return(
     <>
       <h1 className="w3-center"><b>Appointments Details</b></h1>
