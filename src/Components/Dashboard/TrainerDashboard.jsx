@@ -7,15 +7,41 @@ import { getAppoimentList } from "../../API/appoiments";
 
 const localizer = momentLocalizer(moment);
 
+/*const events = [
+  {
+    id: 0,
+    start: moment("2022-04-16 09:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
+    end: moment("2022-04-17 11:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
+    title: "Workout #1"
+  },
+  {
+    id: 1,
+    start: moment("2022-04-18 09:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
+    end: moment("2022-04-19 11:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
+    title: "Workout #2"
+  },
+];*/
 
 export default function TrainerDashboard (props){
     const [appoiments, setAppoiments] = useState([])
+    const [events, setEvents] = useState({})
 
 
   function onGetAppoimentSucces(response){
+    let e = []
+
+    for (let item of response.data.results){
+      console.log(item)
+      e.push({
+        id: item.id,
+        start: moment(item.date_time, "YYYY-MM-DD hh:mm:ss").toDate(),
+        end: moment(item.date_time, "YYYY-MM-DD hh:mm:ss").toDate(),
+        title: item.ex_plan,
+      })
+    }
   console.log(response.data)
   setAppoiments(response.data)
-
+  setEvents(e)
   }
   function onGetAppoimentError(err){
 
@@ -31,50 +57,7 @@ export default function TrainerDashboard (props){
    return () => console.log('unmounting...');
  }, [])
 
-    const events = [
-      {
-        id: 0,
-        start: moment("2022-02-17 09:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
-        end: moment("2022-02-17 11:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
-        title: "Workout #1"
-      },
-      {
-        id: 1,
-        start: moment("2022-02-17 10:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
-        end: moment("2022-02-17 11:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
-        title: "Workout #12"
-      },
-      {
-        id: 2,
-        start: moment("2022-02-17 12:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
-        end: moment("2022-02-17 13:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
-        title: "Workout #13"
-      },
-      {
-        id: 3,
-        start: moment("2022-02-17 15:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
-        end: moment("2022-02-17 16:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
-        title: "Workout #14"
-      },
-      {
-        id: 4,
-        start: moment("2022-02-17 09:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
-        end: moment("2022-02-17 11:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
-        title: "Workout #15"
-      },
-      {
-        id: 5,
-        start: moment("2022-02-17 09:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
-        end: moment("2022-02-17 11:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
-        title: "Workout #16"
-      },
-      {
-        id: 6,
-        start: moment("2022-02-17 09:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
-        end: moment("2022-02-17 11:00:00", "YYYY-MM-DD hh:mm:ss").toDate(),
-        title: "Workout #17"
-      },
-  ];
+
 
   return(
     <>
@@ -86,7 +69,7 @@ export default function TrainerDashboard (props){
        localizer={localizer}
        defaultDate={new Date()}
        defaultView="month"
-       events={null}
+       events={events}
        style={{ height: "100vh" }}
      />
     </>
