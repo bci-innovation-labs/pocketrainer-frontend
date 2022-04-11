@@ -1,8 +1,33 @@
-import { React } from "react";
+import { React, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid} from 'recharts';
+
+import { getClientDetails } from "../../API/clientDetails";
 
 
 export default function ClientDetails(props) {
+  const pathname = useLocation().pathname;
+  const paths = pathname.split('/');
+  const id = paths[paths.length-1];
+
+  function onGetClientDetailsSucces(response){
+  console.log(response.data)
+
+  }
+  function onGetClientDetailsError(err){
+
+  }
+  function onGetClientDetailsDone(){
+
+  }
+
+  useEffect(() => {
+ setTimeout(() => {
+   getClientDetails(id, onGetClientDetailsSucces, onGetClientDetailsError, onGetClientDetailsDone)
+ }, 100)
+    return () => console.log('unmounting...');
+    }, [])
+
 
     const data = [
       { name: '6', protein: 4000, fat: 2400, BurnCal: 2400 },
