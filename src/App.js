@@ -24,6 +24,8 @@ import AddAppointment from "./Components/Appointments/Add";
 import TrainerProfile from "./Components/Trainer/TrainerProfile";
 import ClientNotification from "./Components/Clients/ClientNotification";
 import TrainerProfileEdit from "./Components/Trainer/TrainerProfileEditProfile";
+import ClientAdd from "./Components/Clients/ClientAdd";
+
 
 
 
@@ -36,6 +38,7 @@ function App() {
                     <TopNavigation />
                 </div>
                 <Routes>
+                    <Route path="/add-client" element={<ClientAdd/>}/>
                     <Route path="/processing/set-role" element={<ProcessingSetRole/>}/>
                     <Route path="/processing" element={<Processing/>}/>
                     <Route path="/edit-profile" element={<EditClientProfile/>}/>

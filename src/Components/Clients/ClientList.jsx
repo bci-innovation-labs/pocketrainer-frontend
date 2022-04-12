@@ -44,7 +44,7 @@ export default function ClientList(props) {
               <h1><strong>Clients</strong></h1>
            </div>
            <div className="w3-col s3 w3-container">
-              <button className="w3-btn w3-blue w3-round-xlarge w3-margin w3-right" style={{paddingTop:"15px"}}><i className="fa fa-plus" aria-hidden="true"></i> Add</button>
+              <Link to="/add-client" className="w3-btn w3-blue w3-round-xlarge w3-margin w3-right" style={{paddingTop:"15px"}}><i className="fa fa-plus" aria-hidden="true"></i> Add</Link>
            </div>
         </div>
 

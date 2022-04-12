@@ -11,3 +11,11 @@ export function getClientTrainerRelationshipList(onGetClientTrainerRelationshipS
   .catch(onGetClientTrainerRelationshipError)
   .then(onGetClientTrainerRelationshipDone)
 }
+
+export function postClientTrainerRelationship(data, onSuccefulCallBack, onErrorCallBack, doneCallBack){
+  const a = getDefaultAxios()
+  a.post(LIST_CLIENT_TRAINER_RELATIONSHIP_ENDPOINT, data)
+  .then(onSuccefulCallBack)
+  .catch(onErrorCallBack)
+  .then(doneCallBack)
+}
