@@ -1,18 +1,23 @@
-import { React, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid} from 'recharts';
+import moment from 'moment';
+import { Link } from "react-router-dom";
+
+
 
 import { getClientDetails } from "../../API/clientDetails";
 
 
 export default function ClientDetails(props) {
+  const [details, setDetails] = useState({})
   const pathname = useLocation().pathname;
   const paths = pathname.split('/');
   const id = paths[paths.length-1];
 
   function onGetClientDetailsSucces(response){
   console.log(response.data)
-
+  setDetails(response.data)
   }
   function onGetClientDetailsError(err){
 
@@ -57,7 +62,7 @@ export default function ClientDetails(props) {
               <p></p>
            </div>
            <div className="w3-col m6 w3-center">
-              <h1><strong>Chris James</strong></h1>
+              <h1><strong>{details && details.name}</strong></h1>
            </div>
            <div className="w3-col m3 w3-right">
            </div>
@@ -67,7 +72,7 @@ export default function ClientDetails(props) {
               <p></p>
            </div>
            <div className="w3-col m6 w3-center">
-              <h4>23 Years Old</h4>
+              <h4>{details && details.age} Years Old</h4>
            </div>
            <div className="w3-col m3 w3-right">
            </div>
@@ -77,15 +82,11 @@ export default function ClientDetails(props) {
            </div>
            <div className="w3-col m6 w3-container">
               <h3>Goals</h3>
-              <ul>
-                 <li>Get clear overview of nutritional information information for his meals.</li>
-                 <li>Set diet goals.</li>
-                 <li>Track progress and meet </li>
-              </ul>
-              <h3>Challenges</h3>
-              <ul>
-                 <li>Build muscle mass and gain weight.</li>
-              </ul>
+              <p>{details && details.goals}</p>
+              <h3>Hobbies</h3>
+                <p>{details && details.hobbies}</p>
+              <h3>Occupation</h3>
+                <p>{details && details.occupation}</p>
            </div>
            <div className="w3-col m5">
               <div className="w3-row w3-margin-top">
@@ -108,83 +109,31 @@ export default function ClientDetails(props) {
            </div>
         </div>
         <div className="w3-row">
-        <div className="w3-col m3">
-           <div className="w3-container w3-margin w3-padding w3-round-xxlarge" style={{width:"175px", background: "linear-gradient(45deg, rgba(2,0,36,1) 7%, rgba(72,64,136,0.9419117988992471) 95%)"}}>
-           <div className="w3-center">
-              <div className="w3-container w3-padding">
-                 <div className="w3-row">
-                    <div className="w3-col m6 w3-center">
-                       <h1><strong>18</strong></h1>
-                    </div>
-                    <div className="w3-col m6 w3-center">
-                       <h5>May</h5>
-                    </div>
-                 </div>
-                 <div className="w3-row">
-                    <p>11:00AM-12:00PM</p>
-                 </div>
+          {details && details.appoiments && details.appoiments.map((appoiment) => (
+            <>
+              <div className="w3-col m3">
+                  <div className="w3-container w3-margin w3-padding w3-round-xxlarge" style={{width:"175px", background: "linear-gradient(45deg, rgba(2,0,36,1) 7%, rgba(72,64,136,0.9419117988992471) 95%)"}}>
+                  <div className="w3-center">
+                     <div className="w3-container w3-padding">
+                        <div className="w3-row">
+                           <div className="w3-col m6 w3-center">
+                              <Link to={`/appoiment/${appoiment.id}`}><h1><strong>{moment(appoiment.date_time).format('D')}</strong></h1></Link>
+                           </div>
+                           <div className="w3-col m6 w3-center">
+                              <h5>{moment(appoiment.date_time).format('MMM')}</h5>
+                           </div>
+                        </div>
+                        <div className="w3-row">
+                           <p>{moment(appoiment.date_time).format('LT')}</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
               </div>
-           </div>
+            </>
+          ))}
         </div>
-        </div>
-          <div className="w3-col m3">
-              <div className="w3-container w3-margin w3-padding w3-round-xxlarge" style={{width:"175px", background: "linear-gradient(45deg, rgba(2,0,36,1) 7%, rgba(72,64,136,0.9419117988992471) 95%)"}}>
-              <div className="w3-center">
-                 <div className="w3-container w3-padding">
-                    <div className="w3-row">
-                       <div className="w3-col m6 w3-center">
-                          <h1><strong>18</strong></h1>
-                       </div>
-                       <div className="w3-col m6 w3-center">
-                          <h5>May</h5>
-                       </div>
-                    </div>
-                    <div className="w3-row">
-                       <p>11:00AM-12:00PM</p>
-                    </div>
-                 </div>
-              </div>
-           </div>
-          </div>
-          <div className="w3-col m3">
-              <div className="w3-container w3-margin w3-padding w3-round-xxlarge" style={{width:"175px", background: "linear-gradient(45deg, rgba(2,0,36,1) 7%, rgba(72,64,136,0.9419117988992471) 95%)"}}>
-              <div className="w3-center">
-                 <div className="w3-container w3-padding">
-                    <div className="w3-row">
-                       <div className="w3-col m6 w3-center">
-                          <h1><strong>18</strong></h1>
-                       </div>
-                       <div className="w3-col m6 w3-center">
-                          <h5>May</h5>
-                       </div>
-                    </div>
-                    <div className="w3-row">
-                       <p>11:00AM-12:00PM</p>
-                    </div>
-                 </div>
-              </div>
-           </div>
-          </div>
-          <div className="w3-col m3">
-              <div className="w3-container w3-margin w3-padding w3-round-xxlarge" style={{width:"175px", background: "linear-gradient(45deg, rgba(2,0,36,1) 7%, rgba(72,64,136,0.9419117988992471) 95%)"}}>
-              <div className="w3-center">
-                 <div className="w3-container w3-padding">
-                    <div className="w3-row">
-                       <div className="w3-col m6 w3-center">
-                          <h1><strong>18</strong></h1>
-                       </div>
-                       <div className="w3-col m6 w3-center">
-                          <h5>May</h5>
-                       </div>
-                    </div>
-                    <div className="w3-row">
-                       <p>11:00AM-12:00PM</p>
-                    </div>
-                 </div>
-              </div>
-           </div>
-          </div>
-        </div>
+
         </>
     );
 }
