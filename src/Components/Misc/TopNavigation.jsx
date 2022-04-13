@@ -42,10 +42,16 @@ function TopNavigation() {
                                 <i className="fa fa-dashboard" aria-hidden="true"></i>&nbsp;Dashboard
                             </a>
                             <a href="/clients" className="w3-bar-item w3-button w3-text-black">
-                                <i className="fa fa-dashboard" aria-hidden="true"></i>&nbsp;Clients
+                                <i className="fa fa-users" aria-hidden="true"></i>&nbsp;Clients
                             </a>
-                            <a href="/clients" className="w3-bar-item w3-button w3-text-black">
-                                <i className="fa fa-dashboard" aria-hidden="true"></i>&nbsp;Dashboard
+                            <a href="/add-appoiment" className="w3-bar-item w3-button w3-text-black">
+                                <i className="fa fa-calendar" aria-hidden="true"></i>&nbsp;Schedule
+                            </a>
+                            <a href="/trainer-profile" className="w3-bar-item w3-button w3-text-black">
+                                <i className="fa fa-cogs" aria-hidden="true"></i>&nbsp;Profile
+                            </a>
+                            <a href="/trainer-notification" className="w3-bar-item w3-button w3-text-black">
+                                <i className="fa fa-bell" aria-hidden="true"></i>&nbsp;Notifications
                             </a>
                          </>
                         }
@@ -53,6 +59,12 @@ function TopNavigation() {
                           <>
                             <a href="/dashboard-client" className="w3-bar-item w3-button w3-text-black">
                                 <i className="fa fa-dashboard" aria-hidden="true"></i>&nbsp;Dashboard
+                            </a>
+                            <a href="/trainer-profile" className="w3-bar-item w3-button w3-text-black">
+                                <i className="fa fa-cogs" aria-hidden="true"></i>&nbsp;Profile
+                            </a>
+                            <a href="/client-notification" className="w3-bar-item w3-button w3-text-black">
+                                <i className="fa fa-bell" aria-hidden="true"></i>&nbsp;Notifications
                             </a>
                           </>
                         }
@@ -62,7 +74,7 @@ function TopNavigation() {
                 </div>}
 
                 <div className="w3-bar w3-xxlarge">
-                    <Link to={isEmpty(profile) ? "/login" : "/dashboard"}
+                    <Link to={isEmpty(profile) ? "/login" : "/"}
                    className="w3-bar-item"
                        style={{textDecoration:"none"}}
                    >
