@@ -1,3 +1,4 @@
+import { getClientTrainerRelationshipList } from "../../API/client_trainer_relationship";
 import { React, Component } from "react";
 import {
   Link
@@ -24,15 +25,14 @@ class AddAppointment extends Component{
       //date:new Date(localStorage.getItem("USER_PICKED_DATE")),
       date:new Date(),
       time: null,
-      client_options : [
-      { value: '1', label: 'Adam' },
-      { value: '2', label: 'Jacob' },
-      { value: '3', label: 'Ana' }
-    ],
+      clientOptions : [],
     };
     this.onSubmitClick = this.onSubmitClick.bind(this)
     this.onDateChange = this.onDateChange.bind(this)
     this.onTimeChange = this.onTimeChange.bind(this)
+    this.onGetClientTrainerRelationshipSucces = this.onGetClientTrainerRelationshipSucces.bind(this)
+    this.onGetClientTrainerRelationshipError = this.onGetClientTrainerRelationshipError.bind(this)
+    this.onGetClientTrainerRelationshipDone = this.onGetClientTrainerRelationshipDone.bind(this)
   }
 
   onDateChange(pickedDate){
@@ -48,6 +48,36 @@ class AddAppointment extends Component{
   this.setState({
     time: e,
     })
+  }
+
+  onGetClientTrainerRelationshipSucces(response){
+  console.log(response.data)
+  let arr = []
+    for (let i = 0; i < response.data.results.length; i++){
+      let client = response.data.results[i];
+      console.log(client)
+      let clientOption = {
+        value: client.client,
+        label: client.client_name
+      }
+      arr.push (clientOption)
+    }
+    console.log(arr)
+    this.setState({
+      clientOptions: arr
+    })
+  }
+
+  onGetClientTrainerRelationshipError(err){
+
+  }
+
+  onGetClientTrainerRelationshipDone(){
+
+  }
+
+  componentDidMount(){
+    getClientTrainerRelationshipList(this.onGetClientTrainerRelationshipSucces, this.onGetClientTrainerRelationshipError, this.onGetClientTrainerRelationshipDone)
   }
 
   onSubmitClick(e){
@@ -66,8 +96,7 @@ class AddAppointment extends Component{
     }
 
     render(){
-      const { client_options, specificExerciseOptions, reps, series, routines, specificExercise, groupExercise } = this.state
-      console.log(routines)
+      const { clientOptions, specificExerciseOptions, reps, series, routines, specificExercise, groupExercise } = this.state
       const { onDateChange } = this.state
       const { date, time, specific_exercise_is_disabled } = this.state
       //*new Date().setDate(new Date().getDate() - 1* === Yesterday Day
@@ -107,6 +136,7 @@ class AddAppointment extends Component{
 
             }),
       };
+      console.log(clientOptions)
       return(
         <>
         <div class="w3-row">
@@ -118,7 +148,7 @@ class AddAppointment extends Component{
             <br />
             <h3 className="w3-padding">Client</h3>
             <form className="w3-container">
-              <p><Select styles={customStyles} options={client_options} placeholder={'Select Customer'} /></p>
+              <p><Select styles={customStyles} options={clientOptions} placeholder={'Select Customer'} /></p>
             </form>
             <br />
             <div>
