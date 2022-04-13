@@ -44,7 +44,7 @@ function TopNavigation() {
                             <a href="/clients" className="w3-bar-item w3-button w3-text-black">
                                 <i className="fa fa-users" aria-hidden="true"></i>&nbsp;Clients
                             </a>
-                            <a href="/add-appoiment" className="w3-bar-item w3-button w3-text-black">
+                            <a href="/add-appointment" className="w3-bar-item w3-button w3-text-black">
                                 <i className="fa fa-calendar" aria-hidden="true"></i>&nbsp;Schedule
                             </a>
                             <a href="/trainer-profile" className="w3-bar-item w3-button w3-text-black">

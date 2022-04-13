@@ -1,7 +1,8 @@
 import { getClientTrainerRelationshipList } from "../../API/client_trainer_relationship";
 import { React, Component } from "react";
 import {
-  Link
+  Link,
+  Navigate
 } from "react-router-dom";
 import { format } from 'date-fns'
 import { enGB } from 'date-fns/locale'
@@ -10,6 +11,7 @@ import 'react-nice-dates/build/style.css'
 import { getDay } from 'date-fns'
 import Select from 'react-select'
 import { groupExerciseOptions, sessionExerciseOptions, chestMuscleExerciseOptions, armMuscleExerciseOptions, legMuscleExerciseOptions, abdominalMuscleExerciseOptions, timeOptions } from '../../Constants/Fields'
+import { postAppoiment } from "../../API/appoiments"
 
 
 function addMinutes(dt, minutes) {
@@ -26,6 +28,8 @@ class AddAppointment extends Component{
       date:new Date(),
       time: null,
       clientOptions : [],
+      forceURL: "",
+      client : 0,
     };
     this.onSubmitClick = this.onSubmitClick.bind(this)
     this.onDateChange = this.onDateChange.bind(this)
@@ -33,6 +37,10 @@ class AddAppointment extends Component{
     this.onGetClientTrainerRelationshipSucces = this.onGetClientTrainerRelationshipSucces.bind(this)
     this.onGetClientTrainerRelationshipError = this.onGetClientTrainerRelationshipError.bind(this)
     this.onGetClientTrainerRelationshipDone = this.onGetClientTrainerRelationshipDone.bind(this)
+    this.onPostAppoimentSucces = this.onPostAppoimentSucces.bind(this)
+    this.onPostAppoimentError = this.onPostAppoimentError.bind(this)
+    this.onPostAppoimentDone = this.onPostAppoimentDone.bind(this)
+    this.onClientChange = this.onClientChange.bind(this)
   }
 
   onDateChange(pickedDate){
@@ -80,8 +88,29 @@ class AddAppointment extends Component{
     getClientTrainerRelationshipList(this.onGetClientTrainerRelationshipSucces, this.onGetClientTrainerRelationshipError, this.onGetClientTrainerRelationshipDone)
   }
 
+  onPostAppoimentSucces(response){
+    this.setState({
+      forceURL:"/dashboard-trainer", //TODO Redirect based on the profile role
+    })
+  }
+
+  onPostAppoimentError(err){
+
+  }
+
+  onPostAppoimentDone(){
+
+  }
+
+  onClientChange(e){
+    console.log(e)
+    this.setState({
+      client: e.value
+    })
+  }
+
   onSubmitClick(e){
-    const { date, time } = this.state
+    const { date, time, client } = this.state
 
     const dt = new Date(date.toDateString());
 
@@ -93,12 +122,28 @@ class AddAppointment extends Component{
 
        console.log("your date is:", newDate);
 
+    const trainerString = localStorage.getItem("profile")
+    const trainerObj = JSON.parse(trainerString)
+
+    const data = {
+      client: client,
+      trainer: parseInt(trainerObj.id),
+      date_time: newDate.toISOString(),
+      exercise_plan: "testing",
+      status: 1,
+    }
+
+    postAppoiment(data,this.onPostAppoimentSucces,this.onPostAppoimentError,this.onPostAppoimentDone)
+
     }
 
     render(){
       const { clientOptions, specificExerciseOptions, reps, series, routines, specificExercise, groupExercise } = this.state
-      const { onDateChange } = this.state
+      const { onDateChange, forceURL } = this.state
       const { date, time, specific_exercise_is_disabled } = this.state
+      if (forceURL !==""){
+        return <Navigate to={forceURL} />
+      }
       //*new Date().setDate(new Date().getDate() - 1* === Yesterday Day
 
       //https://stackoverflow.com/a/51844542
@@ -148,7 +193,7 @@ class AddAppointment extends Component{
             <br />
             <h3 className="w3-padding">Client</h3>
             <form className="w3-container">
-              <p><Select styles={customStyles} options={clientOptions} placeholder={'Select Customer'} /></p>
+              <p><Select styles={customStyles} options={clientOptions} onChange={this.onClientChange} placeholder={'Select Customer'} /></p>
             </form>
             <br />
             <div>
@@ -157,6 +202,11 @@ class AddAppointment extends Component{
             </div>
             <h3 className="w3-padding">Date</h3>
             <DatePickerCalendar date={date} onDateChange={this.onDateChange} locale={enGB} />
+            <br />
+            <div>
+              <button type="button" onClick={this.onSubmitClick} className="w3-button w3-green w3-left">Accept</button>
+              <Link to="/dashboard-trainer" className="w3-button w3-red w3-right">Decline</Link>
+            </div>
           </div>
           <div class="w3-col s2  w3-center">
             <p></p>

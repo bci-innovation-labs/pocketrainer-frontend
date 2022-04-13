@@ -12,6 +12,15 @@ export function getAppoimentList(onGetAppoimentSucces, onGetAppoimentError, onGe
   .then(onGetAppoimentDone)
 }
 
+export function postAppoiment(data, onPostAppoimentSucces, onPostAppoimentError, onPostAppoimentDone){
+  console.log(data)
+  const a = getDefaultAxios()
+  a.post(LIST_CREATE_APPOIMENTS_ENDPOINT, data)
+  .then(onPostAppoimentSucces)
+  .catch(onPostAppoimentError)
+  .then(onPostAppoimentDone)
+}
+
 export function postGetAppoimentsIdCall(data, onPostGetAppoimentsIdSucces, onPostGetAppoimentsIdError, onPostGetAppoimentsIdDone){
   console.log(data)
   const a = getDefaultAxios()
