@@ -30,6 +30,7 @@ class AddAppointment extends Component{
       clientOptions : [],
       forceURL: "",
       client : 0,
+      exercise_plan: "",
     };
     this.onSubmitClick = this.onSubmitClick.bind(this)
     this.onDateChange = this.onDateChange.bind(this)
@@ -41,6 +42,7 @@ class AddAppointment extends Component{
     this.onPostAppoimentError = this.onPostAppoimentError.bind(this)
     this.onPostAppoimentDone = this.onPostAppoimentDone.bind(this)
     this.onClientChange = this.onClientChange.bind(this)
+    this.onTextChnage = this.onTextChnage.bind(this)
   }
 
   onDateChange(pickedDate){
@@ -110,7 +112,7 @@ class AddAppointment extends Component{
   }
 
   onSubmitClick(e){
-    const { date, time, client } = this.state
+    const { date, time, client, exercise_plan } = this.state
 
     const dt = new Date(date.toDateString());
 
@@ -129,7 +131,7 @@ class AddAppointment extends Component{
       client: client,
       trainer: parseInt(trainerObj.id),
       date_time: newDate.toISOString(),
-      exercise_plan: "testing",
+      exercise_plan: exercise_plan,
       status: 1,
     }
 
@@ -137,9 +139,16 @@ class AddAppointment extends Component{
 
     }
 
+    onTextChnage(e){
+      const value = e.target.value
+      this.setState({
+        exercise_plan: value
+      })
+    }
+
     render(){
       const { clientOptions, specificExerciseOptions, reps, series, routines, specificExercise, groupExercise } = this.state
-      const { onDateChange, forceURL } = this.state
+      const { onDateChange, forceURL, exercise_plan } = this.state
       const { date, time, specific_exercise_is_disabled } = this.state
       if (forceURL !==""){
         return <Navigate to={forceURL} />
@@ -199,6 +208,10 @@ class AddAppointment extends Component{
             <div>
               <h3 className="w3-padding">Time</h3>
               <p><Select styles={customStyles} options={timeOptions} placeholder={'Select Time'} className="w3-padding" value={time} onChange={this.onTimeChange} /></p>
+            </div>
+            <div>
+              <h3 className="w3-padding">Exercise Plan</h3>
+              <p><input className="w3-input" type="text" onChange={this.onTextChnage} value={exercise_plan} /></p>
             </div>
             <h3 className="w3-padding">Date</h3>
             <DatePickerCalendar date={date} onDateChange={this.onDateChange} locale={enGB} />
