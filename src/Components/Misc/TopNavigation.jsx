@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { useHistory ,useLocation } from 'react-router-dom';
 import useLocalStorage from "../../Utility/useLocalStorage";
 import { isEmpty } from 'lodash';
-import { TRAINER_ROLE_ID } from "../../Constants/App";
+import { TRAINER_ROLE_ID, CLIENT_ROLE_ID } from "../../Constants/App";
 import { BIOMETRICS_CLOUD_LOGIN_URL } from "../../Constants/App"
 
 
 function TopNavigation() {
     const [showMenu, setShowMenu] = useState(false);
-    const [profile] = useLocalStorage("POCKETTRAINER_PROFILE");
+    const [profile] = useLocalStorage("profile");
     const location = useLocation()
     if (location.pathname === "/login" || location.pathname === "/register") {
         return <div style={{paddingTop: "-70px"}}></div>;
@@ -19,6 +19,7 @@ function TopNavigation() {
         setShowMenu(!showMenu);
     }
 
+  console.log(profile)
     return (
         <>
             <div className={`w3-deep-purple w3-top`} style={{height:"70px",}}>
@@ -34,29 +35,30 @@ function TopNavigation() {
                                 <i className="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;Register
                             </a>
                         </>
-                        : <>
-                            <a href="/dashboard" className="w3-bar-item w3-button w3-text-black">
+                      :<>
+                        {profile && profile.role === TRAINER_ROLE_ID &&
+                         <>
+                            <a href="/dashboard-trainer" className="w3-bar-item w3-button w3-text-black">
                                 <i className="fa fa-dashboard" aria-hidden="true"></i>&nbsp;Dashboard
                             </a>
-                            {profile && profile.roleId === TRAINER_ROLE_ID &&
-                                <a href="/users" className="w3-bar-item w3-button w3-text-black">
-                                    <i className="fa fa-users" aria-hidden="true"></i>&nbsp;Clients
-                                </a>
-                            }
-                            <a href="/schedule" className="w3-bar-item w3-button w3-text-black">
-                                <i className="fa fa-calendar" aria-hidden="true"></i>&nbsp;Schedule
+                            <a href="/clients" className="w3-bar-item w3-button w3-text-black">
+                                <i className="fa fa-dashboard" aria-hidden="true"></i>&nbsp;Clients
                             </a>
-                            <a href="/profile" className="w3-bar-item w3-button w3-text-black">
-                                <i className="fa fa-cogs" aria-hidden="true"></i>&nbsp;Profile
+                            <a href="/clients" className="w3-bar-item w3-button w3-text-black">
+                                <i className="fa fa-dashboard" aria-hidden="true"></i>&nbsp;Dashboard
                             </a>
-                            <a href="/notifications" className="w3-bar-item w3-button w3-text-black">
-                                <i className="fa fa-bell" aria-hidden="true"></i>&nbsp;Notifications
+                         </>
+                        }
+                        {profile && profile.role === CLIENT_ROLE_ID &&
+                          <>
+                            <a href="/dashboard-client" className="w3-bar-item w3-button w3-text-black">
+                                <i className="fa fa-dashboard" aria-hidden="true"></i>&nbsp;Dashboard
                             </a>
-                            <a href="/logout" className="w3-bar-item w3-button w3-text-black">
-                                <i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout
-                            </a>
-                        </>
+                          </>
+                        }
+                      </>
                     }
+
                 </div>}
 
                 <div className="w3-bar w3-xxlarge">
