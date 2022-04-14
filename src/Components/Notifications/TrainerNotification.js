@@ -74,7 +74,7 @@ export default function TrainerNotification(props) {
                   <span class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
                   <span class="w3-bar-item w3-circle w3-hide-small" style={{width:"95px"}}><i class="fa fa-bell-o fa-3x" ></i></span>
                   <div class="w3-bar-item">
-                    <span class="w3-large"><strong>{appoiment.ex_plan}</strong></span><br />
+                    <span class="w3-large"><Link to={`/appoiment/${appoiment.id}`} ><strong>{appoiment.ex_plan}</strong></Link></span><br />
                     <span>{moment(appoiment.date_time).format("MMMM Do YYYY, h:mm:ss a")}</span>
                   </div>
                 </li>
