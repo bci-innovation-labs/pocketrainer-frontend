@@ -8,7 +8,7 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid} from 'recharts';
 import 'react-nice-dates/build/style.css'
 import { isSameDay } from 'date-fns'
 import { getProfileDetail } from "../../API/profile";
-import { getAppoimentList, postGetAppoimentsIdCall } from "../../API/appoiments";
+import { getAppoimentList, postGetAppoimentsIdCall} from "../../API/appoiments";
 import moment from 'moment';
 import { Link } from "react-router-dom";
 
@@ -53,6 +53,7 @@ export default function ClientDashboard(props){
     function onPostGetAppoimentsIdDone(){
 
     }
+
 
     function onGetAppoimentSucces(response){
       setAppoiments(response.data.results)
