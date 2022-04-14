@@ -2,7 +2,9 @@ import axios from "axios";
 import { getDefaultAxios } from "./apiHelper"
 
 
-import { LIST_CREATE_APPOIMENTS_ENDPOINT, GET_APPOIMENTS_ID_ENDPOINT,RETRIEVE_UPDATE_DELETE_APPOIMENT_ENDPOINT,UPDATE_HAS_TRAINER_READ_APPOINTMENT_ENDPOINT } from "../Constants/App";
+
+import { LIST_CREATE_APPOIMENTS_ENDPOINT, GET_APPOIMENTS_ID_ENDPOINT,RETRIEVE_UPDATE_DELETE_APPOIMENT_ENDPOINT,UPDATE_HAS_TRAINER_READ_APPOINTMENT_ENDPOINT, UPDATE_HAS_CLIENT_READ_APPOINTMENT } from "../Constants/App";
+
 
 export function getAppoimentList(onGetAppoimentSucces, onGetAppoimentError, onGetAppoimentDone, filters = {}){
   let url = LIST_CREATE_APPOIMENTS_ENDPOINT;
@@ -58,4 +60,12 @@ export function putAppoimentTrainerRead(data, onSucces, onError, onDone){
   .then(onSucces)
   .catch(onError)
   .then(onDone)
+}
+
+export function putAppointmentClientReadDetail(data, onSuccesAppointmentClientRead, onErrorAppointmentClientRead, onDoneAppointmentClientRead){
+  let url = UPDATE_HAS_CLIENT_READ_APPOINTMENT.replace(":id", data.id)
+  axios.put(url, data)
+  .then(onSuccesAppointmentClientRead)
+  .catch(onErrorAppointmentClientRead)
+  .then(onDoneAppointmentClientRead);
 }

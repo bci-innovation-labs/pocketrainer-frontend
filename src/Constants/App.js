@@ -8,3 +8,4 @@ export const RETRIEVE_UPDATE_DELETE_APPOIMENT_ENDPOINT = "http://127.0.0.1:8000/
 export const LIST_CLIENT_TRAINER_RELATIONSHIP_ENDPOINT = "http://127.0.0.1:8000/relationships"
 export const RETRIEVE_UPDATE_DELETE_CLIENT_ENDPOINT = "http://127.0.0.1:8000/client/:id"
 export const UPDATE_HAS_TRAINER_READ_APPOINTMENT_ENDPOINT = "http://127.0.0.1:8000/appoiment/:id/trainer_read"
+export const UPDATE_HAS_CLIENT_READ_APPOINTMENT = "http://127.0.0.1:8000/:id/client_read"

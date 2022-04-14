@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
 import { BIOMETRICS_CLOUD_LOGIN_URL } from "../../Constants/App"
 import { Link } from "react-router-dom"
-import { getAppoimentList } from "../../API/appoiments";
+import { getAppoimentList,  putAppointmentClientReadDetail  } from "../../API/appoiments";
 import moment from 'moment';
 
 
@@ -22,6 +22,8 @@ export default function ClientNotification(props) {
  }, [])
 
    function onGetAppoimentSucces(response){
+     let e = []
+
      setAppoiments(response.data.results)
    }
 
@@ -29,6 +31,26 @@ export default function ClientNotification(props) {
    }
   function onGetAppoimentDone(){
    }
+
+   function onSuccesAppointmentClientRead(response){
+   console.log(response.data)
+
+   }
+   function onErrorAppointmentClientRead(err){
+
+   }
+   function onDoneAppointmentClientRead(){
+
+   }
+
+   function onClick(e, id){
+     console.log(id)
+     let data = {
+       id:id,
+       has_client_read:true,
+     }
+     putAppointmentClientReadDetail(data, onSuccesAppointmentClientRead, onErrorAppointmentClientRead, onDoneAppointmentClientRead)
+    }
 
     return (
       <>
@@ -50,13 +72,13 @@ export default function ClientNotification(props) {
           </div>
           <div className="w3-container w3-padding">
           {appoiments && appoiments.map ((appoiment) => (
-          <ul class="w3-ul w3-card-4 w3-padding-16">
-            <li class="w3-bar">
-              <span class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
-              <span class="w3-bar-item w3-circle w3-hide-small" style={{width:"95px"}}><i class="fa fa-bell-o fa-3x" ></i></span>
-              <div class="w3-bar-item">
-                <span class="w3-large"><strong>{appoiment.trainer_name}</strong></span><br />
-                <span>See you on {moment(appoiment.date_time).format('dddd')}</span>
+          <ul className="w3-ul w3-card-4 w3-padding-16">
+            <li className="w3-bar">
+              <button type="button" onClick={(e, id) => onClick(e, appoiment.id)} className="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</button>
+              <span className="w3-bar-item w3-circle w3-hide-small" style={{width:"95px"}}><i className="fa fa-bell-o fa-3x" ></i></span>
+              <div className="w3-bar-item">
+                <span className="w3-large"><strong><Link to={`/appoiment/${appoiment.id}`}>{appoiment.trainer_name}</Link></strong></span><br />
+                <span>{moment(appoiment.date_time).format('MMMM Do YYYY, h:mm:ss a')}</span>
               </div>
             </li>
           </ul>
