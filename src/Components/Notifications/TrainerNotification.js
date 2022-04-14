@@ -14,8 +14,11 @@ export default function TrainerNotification(props) {
 
   useEffect(() => {
   setTimeout(() => {
+    const trainerString = localStorage.getItem("profile")
+    const trainerObj = JSON.parse(trainerString)
     const filter = {
-      trainer_id: 2
+      trainer_id: trainerObj.id,
+      has_trainer_read: false
     }
     getAppoimentList(onGetAppoimentSucces, onGetAppoimentError, onGetAppoimentDone, filter )
   }, 100)
@@ -35,7 +38,7 @@ export default function TrainerNotification(props) {
      })
    }
  console.log(response.data)
- setAppoiments(response.data)
+ setAppoiments(response.data.results)
  setEvents(e)
  }
  function onGetAppoimentError(err){
@@ -65,46 +68,18 @@ export default function TrainerNotification(props) {
               <h3 className="w3-center w3-xxxlarge"><strong>Trainer Notifications<span> <i class="fa fa-bell-o"></i></span></strong></h3>
             </div>
             <div className="w3-container w3-padding">
+            {appoiments && appoiments.map((appoiment) => (
               <ul class="w3-ul w3-card-4 w3-padding-16">
                 <li class="w3-bar">
                   <span class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
                   <span class="w3-bar-item w3-circle w3-hide-small" style={{width:"95px"}}><i class="fa fa-bell-o fa-3x" ></i></span>
                   <div class="w3-bar-item">
-                    <span class="w3-large"><strong>Trainer</strong></span><br />
-                    <span>See you tomorrow</span>
+                    <span class="w3-large"><strong>{appoiment.ex_plan}</strong></span><br />
+                    <span>{appoiment.date_time}</span>
                   </div>
                 </li>
               </ul>
-              <ul class="w3-ul w3-card-4 w3-padding-16">
-                <li class="w3-bar">
-                  <span class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
-                  <span class="w3-bar-item w3-circle w3-hide-small" style={{width:"95px"}}><i class="fa fa-bell-o fa-3x" ></i></span>
-                  <div class="w3-bar-item">
-                    <span class="w3-large"><strong>Pocket Trainer</strong></span><br />
-                    <span>New appointment</span>
-                  </div>
-                </li>
-              </ul>
-              <ul class="w3-ul w3-card-4 w3-padding-16">
-                <li class="w3-bar">
-                  <span class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
-                  <span class="w3-bar-item w3-circle w3-hide-small" style={{width:"95px"}}><i class="fa fa-bell-o fa-3x" ></i></span>
-                  <div class="w3-bar-item">
-                    <span class="w3-large"><strong>Trainer</strong></span><br />
-                    <span>See you tomorrow</span>
-                  </div>
-                </li>
-              </ul>
-              <ul class="w3-ul w3-card-4 w3-padding-16">
-                <li class="w3-bar">
-                  <span class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
-                  <span class="w3-bar-item w3-circle w3-hide-small" style={{width:"95px"}}><i class="fa fa-bell-o fa-3x" ></i></span>
-                  <div class="w3-bar-item">
-                    <span class="w3-large"><strong>Trainer</strong></span><br />
-                    <span>See you tomorrow</span>
-                  </div>
-                </li>
-              </ul>
+            ))}
             </div>
         </>
     );
