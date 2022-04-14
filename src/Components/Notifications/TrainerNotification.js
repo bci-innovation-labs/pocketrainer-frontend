@@ -1,9 +1,51 @@
-import { React } from "react";
+import { React, useState, useEffect, useCallback } from "react";
 import { BIOMETRICS_CLOUD_LOGIN_URL } from "../../Constants/App"
 import { Link } from "react-router-dom"
+import { getAppoimentList } from "../../API/appoiments";
+import moment from "moment";
+
 
 
 export default function TrainerNotification(props) {
+
+  const [appoiments, setAppoiments] = useState([])
+  const [events, setEvents] = useState({})
+  const [forceURL, setForceURL] = useState("")
+
+  useEffect(() => {
+  setTimeout(() => {
+    const filter = {
+      trainer_id: 2
+    }
+    getAppoimentList(onGetAppoimentSucces, onGetAppoimentError, onGetAppoimentDone, filter )
+  }, 100)
+   return () => console.log('unmounting...');
+ }, [])
+
+ function onGetAppoimentSucces(response){
+   let e = []
+
+   for (let item of response.data.results){
+     console.log(item)
+     e.push({
+       id: item.id,
+       start: moment(item.date_time, "YYYY-MM-DD hh:mm:ss").toDate(),
+       end: moment(item.date_time, "YYYY-MM-DD hh:mm:ss").toDate(),
+       title: item.ex_plan,
+     })
+   }
+ console.log(response.data)
+ setAppoiments(response.data)
+ setEvents(e)
+ }
+ function onGetAppoimentError(err){
+
+ }
+ function onGetAppoimentDone(){
+
+ }
+
+
     return (
         <>
             <div className="w3-row">

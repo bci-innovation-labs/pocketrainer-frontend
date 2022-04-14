@@ -4,9 +4,13 @@ import { getDefaultAxios } from "./apiHelper"
 
 import { LIST_CREATE_APPOIMENTS_ENDPOINT, GET_APPOIMENTS_ID_ENDPOINT,RETRIEVE_UPDATE_DELETE_APPOIMENT_ENDPOINT } from "../Constants/App";
 
-export function getAppoimentList(onGetAppoimentSucces, onGetAppoimentError, onGetAppoimentDone){
+export function getAppoimentList(onGetAppoimentSucces, onGetAppoimentError, onGetAppoimentDone, filters = {}){
+  let url = LIST_CREATE_APPOIMENTS_ENDPOINT;
+  if (filters.trainer_id !== undefined && filters.trainer_id !== null && filters.trainer_id !== 0) {
+    url += "?trainer_id=" + filters.trainer_id
+  }
   const a = getDefaultAxios()
-  a.get(LIST_CREATE_APPOIMENTS_ENDPOINT)
+  a.get(url)
   .then(onGetAppoimentSucces)
   .catch(onGetAppoimentError)
   .then(onGetAppoimentDone)
