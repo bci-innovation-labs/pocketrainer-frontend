@@ -9,16 +9,11 @@ export function getAppoimentList(onGetAppoimentSucces, onGetAppoimentError, onGe
   if (filters.trainer_id !== undefined && filters.trainer_id !== null && filters.trainer_id !== 0) {
     url += "?trainer_id=" + filters.trainer_id
   }
-<<<<<<< HEAD
   else if (filters.client_id !== undefined && filters.client_id !== null && filters.client_id !== 0) {
     url += "?client_id=" + filters.client_id
   }
   if (filters.has_client_read !== undefined && filters.has_client_read !== null) {
     url += "&has_client_read=" + filters.has_client_read
-=======
-  if (filters.has_trainer_read !== undefined && filters.has_trainer_read !== null) {
-    url += "&has_trainer_read=" + filters.has_trainer_read
->>>>>>> 2798d947a9cc7eb65ed4abcf979f6e2cd63644a8
   }
   const a = getDefaultAxios()
   a.get(url)
