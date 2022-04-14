@@ -3,6 +3,7 @@ import { BIOMETRICS_CLOUD_LOGIN_URL } from "../../Constants/App"
 import { Link } from "react-router-dom"
 import { getAppoimentList } from "../../API/appoiments";
 import moment from "moment";
+import { putAppoimentTrainerRead } from "../../API/appoiments"
 
 
 
@@ -48,6 +49,26 @@ export default function TrainerNotification(props) {
 
  }
 
+ function onClick(e,id){
+    console.log(id)
+    let data = {
+      id:id,
+      has_trainer_read:"true",
+    }
+    putAppoimentTrainerRead(data, onPutSucces, onPutError, onPutDone)
+ }
+
+ function onPutSucces(response){
+   window.location.reload();
+ }
+
+ function onPutError(err){
+
+ }
+
+ function onPutDone(){
+
+ }
 
     return (
         <>
@@ -71,7 +92,7 @@ export default function TrainerNotification(props) {
             {appoiments && appoiments.map((appoiment) => (
               <ul class="w3-ul w3-card-4 w3-padding-16">
                 <li class="w3-bar">
-                  <span class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+                  <button  type="button" onClick={(e,id)=>onClick(e,appoiment.id)} class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</button>
                   <span class="w3-bar-item w3-circle w3-hide-small" style={{width:"95px"}}><i class="fa fa-bell-o fa-3x" ></i></span>
                   <div class="w3-bar-item">
                     <span class="w3-large"><Link to={`/appoiment/${appoiment.id}`} ><strong>{appoiment.ex_plan}</strong></Link></span><br />

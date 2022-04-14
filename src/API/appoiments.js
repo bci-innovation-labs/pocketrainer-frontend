@@ -2,7 +2,7 @@ import axios from "axios";
 import { getDefaultAxios } from "./apiHelper"
 
 
-import { LIST_CREATE_APPOIMENTS_ENDPOINT, GET_APPOIMENTS_ID_ENDPOINT,RETRIEVE_UPDATE_DELETE_APPOIMENT_ENDPOINT } from "../Constants/App";
+import { LIST_CREATE_APPOIMENTS_ENDPOINT, GET_APPOIMENTS_ID_ENDPOINT,RETRIEVE_UPDATE_DELETE_APPOIMENT_ENDPOINT,UPDATE_HAS_TRAINER_READ_APPOINTMENT_ENDPOINT } from "../Constants/App";
 
 export function getAppoimentList(onGetAppoimentSucces, onGetAppoimentError, onGetAppoimentDone, filters = {}){
   let url = LIST_CREATE_APPOIMENTS_ENDPOINT;
@@ -14,6 +14,9 @@ export function getAppoimentList(onGetAppoimentSucces, onGetAppoimentError, onGe
   }
   if (filters.has_client_read !== undefined && filters.has_client_read !== null) {
     url += "&has_client_read=" + filters.has_client_read
+  }
+  if (filters.has_trainer_read !== undefined && filters.has_trainer_read !== null) {
+    url += "&has_trainer_read=" + filters.has_trainer_read
   }
   const a = getDefaultAxios()
   a.get(url)
@@ -46,4 +49,13 @@ export function getAppoimentDetails(id, onGetAppoimentDetailsSucces, onGetAppoim
   .then(onGetAppoimentDetailsSucces)
   .catch(onGetAppoimentDetailsError)
   .then(onGetAppoimentDetailsDone)
+}
+
+export function putAppoimentTrainerRead(data, onSucces, onError, onDone){
+  let url = UPDATE_HAS_TRAINER_READ_APPOINTMENT_ENDPOINT.replace(":id", data.id)
+  const a = getDefaultAxios()
+  axios.put(url,data)
+  .then(onSucces)
+  .catch(onError)
+  .then(onDone)
 }
