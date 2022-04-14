@@ -9,6 +9,9 @@ export function getAppoimentList(onGetAppoimentSucces, onGetAppoimentError, onGe
   if (filters.trainer_id !== undefined && filters.trainer_id !== null && filters.trainer_id !== 0) {
     url += "?trainer_id=" + filters.trainer_id
   }
+  if (filters.has_trainer_read !== undefined && filters.has_trainer_read !== null) {
+    url += "&has_trainer_read=" + filters.has_trainer_read
+  }
   const a = getDefaultAxios()
   a.get(url)
   .then(onGetAppoimentSucces)
