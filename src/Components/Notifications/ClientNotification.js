@@ -1,5 +1,6 @@
 import { React } from "react";
-
+import { BIOMETRICS_CLOUD_LOGIN_URL } from "../../Constants/App"
+import { Link } from "react-router-dom"
 
 export default function ClientNotification(props) {
     return (
